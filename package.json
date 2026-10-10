@@ -5,7 +5,8 @@
     "description": "亚马逊评论 VOC 分析管线（Stage1 打标 / Stage2 聚类 / Stage3 报告）",
     "scripts": {
         "analyze": "tsx src/pipeline.ts",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "collect": "tsx src/collect.ts"
     },
     "dependencies": {
         "openai": "^4.60.0",
