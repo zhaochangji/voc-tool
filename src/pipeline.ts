@@ -1,15 +1,24 @@
 /**
  * VOC 分析管线（MVP）
  * 用法：
- *   OPENAI_API_KEY=sk-xxx npm run analyze -- sample-data/example.json   # 真实模式
- *   VOC_DRY_RUN=1 npm run analyze -- sample-data/example.json           # 桩模式（无 Key 验证链路）
+ *   npm run analyze -- sample-data/example.json                     # 读取 .env 配置
+ *   OPENAI_API_KEY=sk-xxx npm run analyze -- sample-data/example.json
+ *   VOC_DRY_RUN=1 npm run analyze -- sample-data/example.json       # 桩模式（无 Key 验证链路）
  *
  * 三段式：Stage1 批量打标 → Stage2 聚类归并 → Stage3 报告合成
- * 内置：JSON Schema 校验、失败重试 1 次、token/成本统计、DRY_RUN 桩模式
+ * 内置：JSON Schema 校验、失败重试 1 次、token/成本统计、DRY_RUN 桩模式、自定义兼容端点
  */
 import OpenAI from 'openai';
 import { z } from 'zod';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+
+/* ---------------- .env 支持（Key 不进 shell 历史） ---------------- */
+if (existsSync('.env')) {
+    for (const line of readFileSync('.env', 'utf-8').split('\n')) {
+        const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.+)\s*$/);
+        if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    }
+}
 
 /* ---------------- 类型与 Schema ---------------- */
 
@@ -64,9 +73,9 @@ const MODEL = process.env.VOC_MODEL || 'gpt-4o-mini';
 const PRICE = { input: 0.15, output: 0.6 };
 const DRY_RUN = process.env.VOC_DRY_RUN === '1';
 
-// 懒加载：DRY_RUN 模式下无 API Key 也能运行
+// 懒加载：DRY_RUN 模式下无 Key 也能运行；OPENAI_BASE_URL 支持任意 OpenAI 兼容端点
 let client: OpenAI | null = null;
-const getClient = () => (client ??= new OpenAI());
+const getClient = () => (client ??= new OpenAI({ baseURL: process.env.OPENAI_BASE_URL || undefined }));
 let totalTokens = { input: 0, output: 0 };
 
 /* ---------------- LLM 调用封装：JSON 校验 + 重试 + 成本统计 ---------------- */
