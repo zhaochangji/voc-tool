@@ -1,234 +1,62 @@
 {
   "meta": {
-    "model": "deepseek-chat",
-    "reviewCount": 40,
-    "cost_usd": 0.0041,
+    "model": "dry-run-stub",
+    "reviewCount": 4,
+    "cost_usd": 0,
     "tokens": {
-      "input": 10026,
-      "output": 3044
+      "input": 0,
+      "output": 0
     }
   },
   "report": {
-    "executive_summary": "The biggest risk is pump clogging and premature failure, which drives frequent deep cleaning and returns, while the biggest opportunity is the strong perception of quiet operation, stainless steel hygiene, and large capacity that can be amplified with realistic claims. Sellers should address maintenance expectations and pump durability upfront to reduce negative reviews and build trust. With accurate listing adjustments, this product can convert well in the cat fountain niche.",
+    "executive_summary": "[DRY-RUN 桩数据] 基于 4 条评论，共 2 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。",
     "top_strengths": [
       {
-        "theme": "Quiet operation",
-        "frequency": 4
-      },
-      {
-        "theme": "Stainless steel durability and hygiene",
-        "frequency": 3
-      },
-      {
-        "theme": "Large capacity and cats drink more",
-        "frequency": 3
+        "theme": "good value for price",
+        "frequency": 1
       }
     ],
     "top_risks": [
       {
-        "theme": "Pump clogging and frequent deep cleaning",
-        "frequency": 5
-      },
-      {
-        "theme": "Water noise and trickling sound",
-        "frequency": 5
-      },
-      {
-        "theme": "Pump premature failure",
-        "frequency": 4
+        "theme": "durability / description mismatch",
+        "frequency": 1
       }
     ],
     "buyer_personas": [
-      "A busy cat owner who wants a low-maintenance fountain but is frustrated by frequent pump cleaning and breakdowns.",
-      "A health-conscious pet parent attracted to stainless steel hygiene and large capacity, but sensitive to noise and water splashing.",
-      "A multi-cat household buyer needing a durable, easy-to-clean fountain, yet concerned about size suitability and cord safety."
+      "multi-pet household owner"
     ],
     "listing_rewrite_checklist": [
-      "Add a maintenance section stating the pump must be torn down and cleaned every 2-3 days, and include a cleaning brush plus step-by-step disassembly instructions in the listing images.",
-      "Highlight the pump warranty length and replacement process prominently in the listing, and note the expected pump lifespan so buyers can plan for replacement.",
-      "Replace 'whisper quiet' claims with a realistic decibel range and note that a slight trickle sound is normal, so buyers do not expect total silence.",
-      "Add a product image showing cord routing and lid locking, and recommend securing the cord or placing the fountain where the cord cannot be pulled.",
-      "Note the recommended water level and mat placement in the listing to reduce splashing and overflow.",
-      "Specify the exact stainless steel grade and clarify that the pump housing and other parts are plastic, and advise regular water changes to prevent algae.",
-      "Add a dimension diagram and drinking-area width, and state the recommended pet size and actual water capacity per color variant.",
-      "Add a filling instruction image showing how to pour water without blocking the vent holes.",
-      "Mention in the listing that a cordless option is not available and suggest cord-hiding placement for cord-sensitive cats."
+      "add accurate dimensions",
+      "set correct expectations in images"
     ],
     "verdict": "improve-first"
   },
   "themes": [
     {
       "kind": "risk",
-      "theme": "Pump clogging and frequent deep cleaning",
-      "frequency": 5,
-      "severity_avg": 3.8,
+      "theme": "durability / description mismatch",
+      "frequency": 1,
+      "severity_avg": 4,
       "sample_seqs": [
         1,
         2,
         3
       ],
       "root_cause": "quality",
-      "listing_action": "Add a maintenance section stating the pump must be torn down and cleaned every 2-3 days, and include a cleaning brush plus step-by-step disassembly instructions in the listing images."
-    },
-    {
-      "kind": "risk",
-      "theme": "Pump premature failure",
-      "frequency": 4,
-      "severity_avg": 4,
-      "sample_seqs": [
-        10,
-        16,
-        27
-      ],
-      "root_cause": "quality",
-      "listing_action": "Highlight the pump warranty length and replacement process prominently in the listing, and note the expected pump lifespan so buyers can plan for replacement."
-    },
-    {
-      "kind": "risk",
-      "theme": "Water noise and trickling sound",
-      "frequency": 5,
-      "severity_avg": 2.6,
-      "sample_seqs": [
-        6,
-        15,
-        21
-      ],
-      "root_cause": "expectation_gap",
-      "listing_action": "Replace 'whisper quiet' claims with a realistic decibel range and note that a slight trickle sound is normal, so buyers do not expect total silence."
-    },
-    {
-      "kind": "risk",
-      "theme": "Cord placement lets cats disassemble unit",
-      "frequency": 3,
-      "severity_avg": 3.7,
-      "sample_seqs": [
-        11,
-        18,
-        23
-      ],
-      "root_cause": "quality",
-      "listing_action": "Add a product image showing cord routing and lid locking, and recommend securing the cord or placing the fountain where the cord cannot be pulled."
-    },
-    {
-      "kind": "risk",
-      "theme": "Water splashing and mess around fountain",
-      "frequency": 2,
-      "severity_avg": 2.5,
-      "sample_seqs": [
-        13,
-        20
-      ],
-      "root_cause": "quality",
-      "listing_action": "Note the recommended water level and mat placement in the listing to reduce splashing and overflow."
-    },
-    {
-      "kind": "risk",
-      "theme": "Rust and algae despite stainless steel claim",
-      "frequency": 2,
-      "severity_avg": 3.5,
-      "sample_seqs": [
-        17,
-        22
-      ],
-      "root_cause": "listing_misleading",
-      "listing_action": "Specify the exact stainless steel grade and clarify that the pump housing and other parts are plastic, and advise regular water changes to prevent algae."
-    },
-    {
-      "kind": "risk",
-      "theme": "Too small for medium-sized cats",
-      "frequency": 2,
-      "severity_avg": 2.5,
-      "sample_seqs": [
-        14,
-        24
-      ],
-      "root_cause": "size_mismatch",
-      "listing_action": "Add a dimension diagram and drinking-area width, and state the recommended pet size and actual water capacity per color variant."
-    },
-    {
-      "kind": "risk",
-      "theme": "Top venting holes make filling difficult",
-      "frequency": 1,
-      "severity_avg": 2,
-      "sample_seqs": [
-        9
-      ],
-      "root_cause": "quality",
-      "listing_action": "Add a filling instruction image showing how to pour water without blocking the vent holes."
-    },
-    {
-      "kind": "risk",
-      "theme": "Cord irritates cats",
-      "frequency": 1,
-      "severity_avg": 2,
-      "sample_seqs": [
-        25
-      ],
-      "root_cause": "expectation_gap",
-      "listing_action": "Mention in the listing that a cordless option is not available and suggest cord-hiding placement for cord-sensitive cats."
+      "listing_action": "add accurate dimensions and material specs to bullet points"
     },
     {
       "kind": "strength",
-      "theme": "Quiet operation",
-      "frequency": 4,
-      "severity_avg": 0,
-      "sample_seqs": [
-        31,
-        32,
-        39
-      ],
-      "root_cause": "expectation_gap",
-      "listing_action": "Keep emphasizing quiet operation but pair it with the realistic decibel note to avoid over-promising."
-    },
-    {
-      "kind": "strength",
-      "theme": "Stainless steel durability and hygiene",
-      "frequency": 3,
-      "severity_avg": 0,
-      "sample_seqs": [
-        36,
-        37,
-        39
-      ],
-      "root_cause": "quality",
-      "listing_action": "Feature the stainless steel material and its hygiene benefits in the main bullet points and images."
-    },
-    {
-      "kind": "strength",
-      "theme": "Large capacity and cats drink more",
-      "frequency": 3,
-      "severity_avg": 0,
-      "sample_seqs": [
-        31,
-        37,
-        40
-      ],
-      "root_cause": "quality",
-      "listing_action": "Highlight the capacity and increased drinking behavior in the listing copy and A+ content."
-    },
-    {
-      "kind": "strength",
-      "theme": "Easy setup and cleaning",
-      "frequency": 3,
-      "severity_avg": 0,
-      "sample_seqs": [
-        31,
-        36,
-        38
-      ],
-      "root_cause": "quality",
-      "listing_action": "Add a quick-start setup and cleaning guide image to reinforce ease of use."
-    },
-    {
-      "kind": "strength",
-      "theme": "Responsive customer service and pump replacement",
+      "theme": "good value for price",
       "frequency": 1,
       "severity_avg": 0,
       "sample_seqs": [
-        35
+        1,
+        2,
+        3
       ],
-      "root_cause": "quality",
-      "listing_action": "State the warranty and customer service contact process clearly in the listing."
+      "root_cause": "expectation_gap",
+      "listing_action": "highlight value messaging in title"
     }
   ]
 }
