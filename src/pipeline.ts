@@ -4,7 +4,7 @@
  *   npm run analyze -- sample-data/example.json                    # 读取 .env 配置
  *   VOC_DRY_RUN=1 npm run analyze -- sample-data/real-B0FPFZ7XFJ.json  # 桩模式（无 LLM Key 验证链路）
  *
- * 三段式：Stage1 批量打标 → Stage2 聚类归并 → Stage3 报告合成
+ * 三段式：Stage1 批量打标 → Stage2 聚类归并（risk/strength 双组） → Stage3 报告合成
  * 内置：JSON Schema 校验、失败重试 1 次、token/成本统计、DRY_RUN 桩模式、自定义兼容端点
  * 输入：裸数组 或 collect.ts 产物（{meta, reviews}）均可
  */
@@ -39,12 +39,13 @@ const TagSchema = z.object({
     supports_listing_fix: z.boolean().nullable().default(null),
 });
 
-// Stage2 输出：缺陷/优点主题
+// Stage2 输出：主题（kind 区分优点/风险，解决 Strengths 混淆）
 const ThemeSchema = z.object({
+    kind: z.enum(['strength', 'risk']),
     theme: z.string(),
     frequency: z.number().int(),
     severity_avg: z.number().min(0).max(5),
-    sample_seqs: z.array(z.number().int()).min(1).max(3), // ★ 强制引用原文，防幻觉（至少 1 条）
+    sample_seqs: z.array(z.number().int()).min(1).max(8), // ★ 强制引用原文，防幻觉（解析后截断到前 3）
     root_cause: z.enum([
         'quality', 'size_mismatch', 'listing_misleading', 'packaging', 'logistics', 'expectation_gap',
     ]),
@@ -123,18 +124,18 @@ const stubThemes = (tags: Tag[]): Theme[] => {
     const pick3 = [seqs[0], seqs[1] ?? seqs[0], seqs[2] ?? seqs[0]];
     return [
         ...(complaints.length
-            ? [{ theme: 'durability / description mismatch', frequency: complaints.length, severity_avg: 4, sample_seqs: pick3, root_cause: 'quality' as const, listing_action: 'add accurate dimensions and material specs to bullet points' }]
+            ? [{ kind: 'risk' as const, theme: 'durability / description mismatch', frequency: complaints.length, severity_avg: 4, sample_seqs: pick3, root_cause: 'quality' as const, listing_action: 'add accurate dimensions and material specs to bullet points' }]
             : []),
         ...(praises.length
-            ? [{ theme: 'good value for price', frequency: praises.length, severity_avg: 0, sample_seqs: pick3, root_cause: 'expectation_gap' as const, listing_action: 'highlight value messaging in title' }]
+            ? [{ kind: 'strength' as const, theme: 'good value for price', frequency: praises.length, severity_avg: 0, sample_seqs: pick3, root_cause: 'expectation_gap' as const, listing_action: 'highlight value messaging in title' }]
             : []),
     ];
 };
 
 const stubReport = (themes: Theme[], n: number): Report => ({
     executive_summary: `[DRY-RUN 桩数据] 基于 ${n} 条评论，共 ${themes.length} 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。`,
-    top_strengths: themes.filter(t => t.severity_avg === 0).map(t => ({ theme: t.theme, frequency: t.frequency })),
-    top_risks: themes.filter(t => t.severity_avg > 0).map(t => ({ theme: t.theme, frequency: t.frequency })),
+    top_strengths: themes.filter(t => t.kind === 'strength').map(t => ({ theme: t.theme, frequency: t.frequency })),
+    top_risks: themes.filter(t => t.kind === 'risk').map(t => ({ theme: t.theme, frequency: t.frequency })),
     buyer_personas: ['multi-pet household owner'],
     listing_rewrite_checklist: ['add accurate dimensions', 'set correct expectations in images'],
     verdict: 'improve-first',
@@ -162,14 +163,15 @@ function stage2Prompt(tags: Tag[], reviewsById: Map<number, Review>): string {
             const r = reviewsById.get(t.seq ?? -1);
             return `seq=${t.seq} sev=${t.severity} topic="${t.topic}" fixable=${t.supports_listing_fix} 原文摘要:${r?.body.slice(0, 80)}`;
         }).join('\n');
-    return `以下是同一产品的评论打标结果。聚成 3-8 个主题，输出 JSON（{"themes": [...]}），每个主题：
+    return `以下是同一产品的评论打标结果，分【抱怨】和【好评】两组。分别聚成主题，输出 JSON（{"themes": [...]}），每个主题：
+kind: "risk"（来自抱怨打标组） | "strength"（来自好评打标组）
 theme: 主题名(名词短语)
 frequency: 提及次数（统计打标结果，不是猜）
-severity_avg: 平均严重度(0-5)
-sample_seqs: 3 个最典型评论的 seq（必须从下列真实 seq 中取，禁止编造）
+severity_avg: 平均严重度(0-5，strength 主题填 0)
+sample_seqs: 最多 3 个最典型评论的 seq（必须从下列真实 seq 中取，禁止编造，不要超过 3 个）
 root_cause: quality|size_mismatch|listing_misleading|packaging|logistics|expectation_gap
 listing_action: 一句可执行的修改建议（无法缓解则输出 "not_fixable_by_listing"）
-主题按 frequency*severity_avg 排序。仅输出 JSON。
+硬性要求：除非某组打标为空，否则 risk 组和 strength 组各至少 1 个主题。全部主题按 frequency*severity_avg 排序。仅输出 JSON。
 
 【抱怨打标】
 ${digest(complaints)}
@@ -181,7 +183,8 @@ ${digest(praises)}`;
 function stage3Prompt(themes: Theme[], reviewCount: number): string {
     return `基于以下主题数据（来自 ${reviewCount} 条评论）写报告，目标读者为亚马逊中小卖家。输出 JSON：
 executive_summary: 3 句话——最大风险与机会
-top_strengths / top_risks: 各最多 3 条 {theme, frequency}
+top_strengths: 从 kind="strength" 的主题里取最多 3 条 {theme, frequency}（禁止混入 risk 主题）
+top_risks: 从 kind="risk" 的主题里取最多 3 条 {theme, frequency}（禁止混入 strength 主题）
 buyer_personas: 2-3 个买家画像(一句话/个)
 listing_rewrite_checklist: 按风险排序的可执行清单
 verdict: "buy-to-sell" | "improve-first" | "avoid"
@@ -233,10 +236,10 @@ async function main() {
     const themes: Theme[] = DRY_RUN
         ? stubThemes(tags)
         : (await callJSON(
-              z.object({ themes: z.array(ThemeSchema).min(1).max(10) }),
+              z.object({ themes: z.array(ThemeSchema).min(1).max(16) }),
               stage2Prompt(tags, reviewsById),
               'stage2',
-          )).themes;
+          )).themes.map(t => ({ ...t, sample_seqs: t.sample_seqs.slice(0, 3) }));
     const report: Report = DRY_RUN
         ? stubReport(themes, reviews.length)
         : await callJSON(ReportSchema, stage3Prompt(themes, reviews.length), 'stage3');
