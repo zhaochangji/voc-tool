@@ -17,8 +17,9 @@
 - [x] DRY_RUN 桩模式端到端验证通过（无 API Key 可跑通全链路）
 - [ ] 真实 LLM 首跑：`OPENAI_API_KEY=xxx npm run analyze -- sample-data/example.json`（成本预期 <$0.01）
 - [ ] 注册 Pangolin/ScraperAPI 免费层，拉取 1 个真实 ASIN 的 100+ 条评论
-- [ ] 用真实数据产出**第一份真实报告**（= 发帖获客弹药）
+- [x] **第一份真实报告已产出**：Veken B0FPFZ7XFJ，40 条，$0.0036/10.5s，引用 18/18 真实（2026-10-10）
 - [ ] Prompt 调优：跑 3 个不同类目 ASIN，对比打标准确率
+- [ ] 修 Strengths 混淆 bug（详见 RESUME.md）
 - [ ] Next.js Web 端（登录 / 提交 ASIN / 报告展示页 / Stripe 或 Lemon Squeezy）
 - [ ] 部署上线（Vercel + Supabase + 域名）
 
@@ -49,3 +50,8 @@
 - [ ] collect.ts：MCP 客户端封装 + 增量拉取（设计已定稿在 PANGOLIN-MCP.md 底部）
 - [ ] LLM Key（Pangolinfo 是采集 Key，LLM 仍缺；任何 OpenAI 兼容平台均可）
 - [ ] 真实评论 → pipeline 全链路 → 第一份真实报告
+
+## 会话恢复机制
+
+每次重要进展后：更新 RESUME.md（现状/命令/坑/下一步）+ ROADMAP.md + git commit。
+新会话开工前：先读 RESUME.md。
