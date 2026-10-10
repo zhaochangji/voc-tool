@@ -41,3 +41,11 @@
 - LLM 每报告 $0.3-0.8（gpt-4o-mini，实际值以首跑为准）
 - 采集 API $0-50/月（免费层起步）
 - 免费用户限额：1 ASIN/月 + 500 条评论上限
+
+## Phase 1 进展（2026-10-10 晚）
+
+- [x] Pangolinfo 接入全链路打通（见 PANGOLIN-MCP.md）：MCP 端点 mcp.pangolinfo.com/mcp + search_amazon/get_amazon_product/get_amazon_reviews 全部实测成功
+- [x] 真实差评已拉到（ASIN B0FPFZ7XFJ 猫饮水机，10 条/页，字段齐全），返回格式与字段映射已记录
+- [ ] collect.ts：MCP 客户端封装 + 增量拉取（设计已定稿在 PANGOLIN-MCP.md 底部）
+- [ ] LLM Key（Pangolinfo 是采集 Key，LLM 仍缺；任何 OpenAI 兼容平台均可）
+- [ ] 真实评论 → pipeline 全链路 → 第一份真实报告
