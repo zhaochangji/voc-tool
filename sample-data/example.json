@@ -1,0 +1,34 @@
+[
+    {
+        "seq": 1,
+        "rating": 5,
+        "verified": true,
+        "title": "Perfect for my small apartment",
+        "body": "Bought this water fountain for my two cats. They took to it immediately. Silent pump, easy to clean, and the filter lasts about a month. Great value for the price.",
+        "review_date": "2026-08-12"
+    },
+    {
+        "seq": 2,
+        "rating": 1,
+        "verified": true,
+        "title": "Stopped working after 3 weeks",
+        "body": "The pump died after 3 weeks of light use. Contacted the seller, no response. Do not buy.",
+        "review_date": "2026-09-02"
+    },
+    {
+        "seq": 3,
+        "rating": 3,
+        "verified": true,
+        "title": "Good product but MUCH smaller than pictured",
+        "body": "The fountain itself works fine, but it is way smaller than the photos suggest. My large dog can't use it. If they had accurate dimensions in the listing I would have bought the bigger model instead.",
+        "review_date": "2026-09-15"
+    },
+    {
+        "seq": 4,
+        "rating": 2,
+        "verified": false,
+        "title": "It's okay",
+        "body": "Amazing product!!! Best ever!!! Everyone should buy this!!!",
+        "review_date": "2026-09-20"
+    }
+]

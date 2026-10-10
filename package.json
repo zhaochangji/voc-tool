@@ -1,0 +1,19 @@
+{
+    "name": "voc-tool",
+    "version": "0.1.0",
+    "private": true,
+    "description": "亚马逊评论 VOC 分析管线（Stage1 打标 / Stage2 聚类 / Stage3 报告）",
+    "scripts": {
+        "analyze": "tsx src/pipeline.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "openai": "^4.60.0",
+        "zod": "^3.23.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "tsx": "^4.0.0",
+        "typescript": "^5.4.0"
+    }
+}
