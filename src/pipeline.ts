@@ -30,9 +30,9 @@ const ReviewSchema = z.object({
     body: z.string(),
 });
 
-// Stage1 输出：单条打标
+// Stage1 输出：单条打标（seq 允许模型省略，由批次顺序回填）
 const TagSchema = z.object({
-    seq: z.number().int(),
+    seq: z.number().int().nullish(),
     rating_bin: z.enum(['praise', 'complaint', 'scenario', 'persona', 'suspect']),
     topic: z.string(),
     severity: z.number().min(1).max(5).nullable().default(null),
@@ -44,7 +44,7 @@ const ThemeSchema = z.object({
     theme: z.string(),
     frequency: z.number().int(),
     severity_avg: z.number().min(0).max(5),
-    sample_seqs: z.array(z.number().int()).length(3), // ★ 强制引用原文，防幻觉
+    sample_seqs: z.array(z.number().int()).min(1).max(3), // ★ 强制引用原文，防幻觉（至少 1 条）
     root_cause: z.enum([
         'quality', 'size_mismatch', 'listing_misleading', 'packaging', 'logistics', 'expectation_gap',
     ]),
@@ -69,8 +69,8 @@ type Report = z.infer<typeof ReportSchema>;
 /* ---------------- 运行配置 ---------------- */
 
 const MODEL = process.env.VOC_MODEL || 'gpt-4o-mini';
-// 成本表：USD / 1M tokens（换模型时同步更新）
-const PRICE = { input: 0.15, output: 0.6 };
+// 成本表：USD / 1M tokens（deepseek-chat ≈ $0.28 in / $0.42 out，随官方调价更新）
+const PRICE = { input: 0.28, output: 0.42 };
 const DRY_RUN = process.env.VOC_DRY_RUN === '1';
 
 // 懒加载：DRY_RUN 模式下无 Key 也能运行；OPENAI_BASE_URL 支持任意 OpenAI 兼容端点
@@ -119,7 +119,7 @@ const stubTags = (batch: Review[]): Tag[] =>
 const stubThemes = (tags: Tag[]): Theme[] => {
     const complaints = tags.filter(t => t.rating_bin === 'complaint');
     const praises = tags.filter(t => t.rating_bin === 'praise');
-    const seqs = tags.map(t => t.seq);
+    const seqs = tags.map(t => t.seq ?? 0);
     const pick3 = [seqs[0], seqs[1] ?? seqs[0], seqs[2] ?? seqs[0]];
     return [
         ...(complaints.length
@@ -149,7 +149,7 @@ topic: 一句话主题(英文, <=12词)
 severity: 1-5（仅 complaint 填数字，其余 null）
 supports_listing_fix: true/false/null（抱怨能否靠改 Listing 文案缓解，如"尺寸说明不清"=true，"两周就坏"=false；非 complaint 为 null）
 
-规则：只依据原文，不得推断；tags 顺序与输入 seq 一致；仅输出 JSON。
+规则：只依据原文，不得推断；tags 数组顺序与输入评论顺序一致，每条的 seq 字段必须原样复制输入 # 后的数字；仅输出 JSON。
 评论（seq, rating, verified, title, body）：
 ${batch.map(r => `#${r.seq} | ${r.rating}星 | VP:${r.verified} | ${r.title}\n${r.body}`).join('\n---\n')}`;
 }
@@ -159,7 +159,7 @@ function stage2Prompt(tags: Tag[], reviewsById: Map<number, Review>): string {
     const praises = tags.filter(t => t.rating_bin === 'praise');
     const digest = (list: Tag[]) =>
         list.map(t => {
-            const r = reviewsById.get(t.seq);
+            const r = reviewsById.get(t.seq ?? -1);
             return `seq=${t.seq} sev=${t.severity} topic="${t.topic}" fixable=${t.supports_listing_fix} 原文摘要:${r?.body.slice(0, 80)}`;
         }).join('\n');
     return `以下是同一产品的评论打标结果。聚成 3-8 个主题，输出 JSON（{"themes": [...]}），每个主题：
@@ -202,13 +202,18 @@ async function runStage1(reviews: Review[]): Promise<Tag[]> {
             console.error(`  [stage1/${i / BATCH + 1}] dry-run stub`);
             continue;
         }
-        // zod 数组嵌套在 json_object 下：让模型包 {"tags": [...]} 再取出
+        // zod 数组嵌套在 json_object 下：让模型包 {"tags": [...]} 再取出；模型漏填 seq 时按批次顺序回填并校验未乱序
         const out = await callJSON(
             z.object({ tags: z.array(TagSchema).length(batch.length) }),
             stage1Prompt(batch),
             `stage1/${i / BATCH + 1}`,
         );
-        tags.push(...out.tags);
+        const expected = new Set(batch.map(r => r.seq));
+        const normalized = out.tags.map((t, i) => ({ ...t, seq: t.seq ?? batch[i].seq }));
+        if (!normalized.every(t => expected.has(t.seq))) {
+            throw new Error(`[stage1/${i / BATCH + 1}] 模型输出与输入 seq 不匹配（可能乱序），请重试`);
+        }
+        tags.push(...normalized);
     }
     return tags;
 }
@@ -228,7 +233,7 @@ async function main() {
     const themes: Theme[] = DRY_RUN
         ? stubThemes(tags)
         : (await callJSON(
-              z.object({ themes: z.array(ThemeSchema).min(1).max(8) }),
+              z.object({ themes: z.array(ThemeSchema).min(1).max(10) }),
               stage2Prompt(tags, reviewsById),
               'stage2',
           )).themes;

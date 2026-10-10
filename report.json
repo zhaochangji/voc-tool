@@ -1,25 +1,140 @@
 {
   "meta": {
-    "model": "dry-run-stub",
+    "model": "deepseek-chat",
     "reviewCount": 40,
-    "cost_usd": 0,
+    "cost_usd": 0.0036,
     "tokens": {
-      "input": 0,
-      "output": 0
+      "input": 9255,
+      "output": 2494
     }
   },
   "report": {
-    "executive_summary": "[DRY-RUN 桩数据] 基于 40 条评论，共 0 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。",
-    "top_strengths": [],
-    "top_risks": [],
+    "executive_summary": "最大风险是水泵故障（6次，严重度4.5）和清洁频繁（7次），可能导致高退货和差评。最大机会是通过透明化产品局限（如噪音、容量）和提供易维护方案（可替换水泵、清洁指南）来建立信任，降低售后成本。中小卖家应优先改进listing描述，避免绝对化宣传，并考虑捆绑替换水泵作为卖点。",
+    "top_strengths": [
+      {
+        "theme": "清洁频繁/易积垢发黏",
+        "frequency": 7
+      },
+      {
+        "theme": "噪音大/滴水声",
+        "frequency": 6
+      },
+      {
+        "theme": "水泵故障/寿命短",
+        "frequency": 6
+      }
+    ],
+    "top_risks": [
+      {
+        "theme": "水泵故障/寿命短",
+        "frequency": 6
+      },
+      {
+        "theme": "清洁频繁/易积垢发黏",
+        "frequency": 7
+      },
+      {
+        "theme": "噪音大/滴水声",
+        "frequency": 6
+      }
+    ],
     "buyer_personas": [
-      "multi-pet household owner"
+      "忙碌的上班族，希望饮水机易清洁且水泵耐用，但抱怨清洁频繁和水泵故障。",
+      "多猫家庭，担心猫拆卸电源线和容量不足，需要防拆设计和更大容量。",
+      "注重卫生的猫主人，对生锈和藻类滋生敏感，期望不锈钢材质和防藻设计。"
     ],
     "listing_rewrite_checklist": [
-      "add accurate dimensions",
-      "set correct expectations in images"
+      "明确标注水泵寿命（如6-12个月）和保修期限，并提供单独购买替换水泵的链接和更换教程。",
+      "说明建议清洁频率（每2-3天）并附清洁步骤图，强调可拆卸易清洗结构。",
+      "如实标注运行噪音分贝范围（如≤40dB），删除“超静音”等绝对化描述。",
+      "增加防拆卡扣说明和电源线走线建议（靠墙固定），提示多猫家庭注意。",
+      "明确不锈钢材质等级和防锈保养建议，说明避免阳光直射以减少藻类。",
+      "标注实际容量和适用猫体型，附尺寸对比图，说明绿色款容量差异。",
+      "增加注水操作示意图，说明顶部通风孔设计及正确加水方式。"
     ],
     "verdict": "improve-first"
   },
-  "themes": []
+  "themes": [
+    {
+      "theme": "水泵故障/寿命短",
+      "frequency": 6,
+      "severity_avg": 4.5,
+      "sample_seqs": [
+        10,
+        16,
+        29
+      ],
+      "root_cause": "quality",
+      "listing_action": "在详情页明确标注水泵寿命与保修期限，并提供可单独购买替换水泵的链接与更换教程。"
+    },
+    {
+      "theme": "清洁频繁/易积垢发黏",
+      "frequency": 7,
+      "severity_avg": 3.43,
+      "sample_seqs": [
+        2,
+        3,
+        19
+      ],
+      "root_cause": "quality",
+      "listing_action": "在详情页说明建议清洁频率（如每2-3天）并附清洁步骤图，同时提供可拆卸易清洗结构说明。"
+    },
+    {
+      "theme": "噪音大/滴水声",
+      "frequency": 6,
+      "severity_avg": 2.83,
+      "sample_seqs": [
+        6,
+        15,
+        30
+      ],
+      "root_cause": "quality",
+      "listing_action": "在详情页如实标注运行噪音分贝范围，避免使用“超静音”等绝对化描述。"
+    },
+    {
+      "theme": "猫可拆卸/电源线被拉扯",
+      "frequency": 3,
+      "severity_avg": 3.33,
+      "sample_seqs": [
+        11,
+        18,
+        23
+      ],
+      "root_cause": "quality",
+      "listing_action": "在详情页增加防拆卡扣说明与电源线走线建议（如靠墙固定），并提示多猫家庭注意。"
+    },
+    {
+      "theme": "生锈/藻类滋生",
+      "frequency": 2,
+      "severity_avg": 4,
+      "sample_seqs": [
+        17,
+        22
+      ],
+      "root_cause": "quality",
+      "listing_action": "在详情页明确不锈钢材质等级及防锈保养建议，并说明避免阳光直射以减少藻类。"
+    },
+    {
+      "theme": "溅水/容量偏小",
+      "frequency": 3,
+      "severity_avg": 2.67,
+      "sample_seqs": [
+        14,
+        20,
+        24
+      ],
+      "root_cause": "size_mismatch",
+      "listing_action": "在详情页标注实际容量与适用猫体型，并附尺寸对比图，说明绿色款容量差异。"
+    },
+    {
+      "theme": "顶部通风孔/注水不便",
+      "frequency": 1,
+      "severity_avg": 2,
+      "sample_seqs": [
+        9
+      ],
+      "root_cause": "quality",
+      "listing_action": "在详情页增加注水操作示意图，说明顶部通风孔设计及正确加水方式。"
+    }
+  ]
 }
