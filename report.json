@@ -1,7 +1,7 @@
 {
   "meta": {
     "model": "dry-run-stub",
-    "reviewCount": 4,
+    "reviewCount": 40,
     "cost_usd": 0,
     "tokens": {
       "input": 0,
@@ -9,19 +9,9 @@
     }
   },
   "report": {
-    "executive_summary": "[DRY-RUN 桩数据] 基于 4 条评论，共 2 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。",
-    "top_strengths": [
-      {
-        "theme": "good value for price",
-        "frequency": 1
-      }
-    ],
-    "top_risks": [
-      {
-        "theme": "durability / description mismatch",
-        "frequency": 1
-      }
-    ],
+    "executive_summary": "[DRY-RUN 桩数据] 基于 40 条评论，共 0 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。",
+    "top_strengths": [],
+    "top_risks": [],
     "buyer_personas": [
       "multi-pet household owner"
     ],
@@ -31,30 +21,5 @@
     ],
     "verdict": "improve-first"
   },
-  "themes": [
-    {
-      "theme": "durability / description mismatch",
-      "frequency": 1,
-      "severity_avg": 4,
-      "sample_seqs": [
-        1,
-        2,
-        3
-      ],
-      "root_cause": "quality",
-      "listing_action": "add accurate dimensions and material specs to bullet points"
-    },
-    {
-      "theme": "good value for price",
-      "frequency": 1,
-      "severity_avg": 0,
-      "sample_seqs": [
-        1,
-        2,
-        3
-      ],
-      "root_cause": "expectation_gap",
-      "listing_action": "highlight value messaging in title"
-    }
-  ]
+  "themes": []
 }

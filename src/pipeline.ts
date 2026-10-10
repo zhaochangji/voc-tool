@@ -1,14 +1,24 @@
 /**
  * VOC 分析管线（MVP）
  * 用法：
- *   OPENAI_API_KEY=sk-xxx npm run analyze -- sample-data/example.json
+ *   npm run analyze -- sample-data/example.json                    # 读取 .env 配置
+ *   VOC_DRY_RUN=1 npm run analyze -- sample-data/real-B0FPFZ7XFJ.json  # 桩模式（无 LLM Key 验证链路）
  *
  * 三段式：Stage1 批量打标 → Stage2 聚类归并 → Stage3 报告合成
- * 内置：JSON Schema 校验、失败重试 1 次、token/成本统计
+ * 内置：JSON Schema 校验、失败重试 1 次、token/成本统计、DRY_RUN 桩模式、自定义兼容端点
+ * 输入：裸数组 或 collect.ts 产物（{meta, reviews}）均可
  */
 import OpenAI from 'openai';
 import { z } from 'zod';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+
+/* ---------------- .env 支持（Key 不进 shell 历史） ---------------- */
+if (existsSync('.env')) {
+    for (const line of readFileSync('.env', 'utf-8').split('\n')) {
+        const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.+)\s*$/);
+        if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    }
+}
 
 /* ---------------- 类型与 Schema ---------------- */
 
@@ -56,18 +66,23 @@ type Tag = z.infer<typeof TagSchema>;
 type Theme = z.infer<typeof ThemeSchema>;
 type Report = z.infer<typeof ReportSchema>;
 
-/* ---------------- 成本表（按需换成你的模型价格，单位 USD / 1M tokens） ---------------- */
+/* ---------------- 运行配置 ---------------- */
+
 const MODEL = process.env.VOC_MODEL || 'gpt-4o-mini';
+// 成本表：USD / 1M tokens（换模型时同步更新）
 const PRICE = { input: 0.15, output: 0.6 };
+const DRY_RUN = process.env.VOC_DRY_RUN === '1';
+
+// 懒加载：DRY_RUN 模式下无 Key 也能运行；OPENAI_BASE_URL 支持任意 OpenAI 兼容端点
+let client: OpenAI | null = null;
+const getClient = () => (client ??= new OpenAI({ baseURL: process.env.OPENAI_BASE_URL || undefined }));
+let totalTokens = { input: 0, output: 0 };
 
 /* ---------------- LLM 调用封装：JSON 校验 + 重试 + 成本统计 ---------------- */
 
-const client = new OpenAI();
-let totalTokens = { input: 0, output: 0 };
-
-async function callJSON<T>(schema: z.ZodType<T>, prompt: string, tag: string): Promise<T> {
+async function callJSON<T>(schema: { parse: (data: unknown) => T }, prompt: string, tag: string): Promise<T> {
     for (let attempt = 0; attempt <= 1; attempt++) {
-        const res = await client.chat.completions.create({
+        const res = await getClient().chat.completions.create({
             model: MODEL,
             temperature: 0,
             response_format: { type: 'json_object' },
@@ -87,6 +102,43 @@ async function callJSON<T>(schema: z.ZodType<T>, prompt: string, tag: string): P
     }
     throw new Error('unreachable');
 }
+
+/* ---------------- DRY_RUN 桩（确定性规则，仅验证编排链路，非真实分析） ---------------- */
+
+const stubTags = (batch: Review[]): Tag[] =>
+    batch.map(r =>
+        !r.verified
+            ? { seq: r.seq, rating_bin: 'suspect', topic: 'unverified generic praise', severity: null, supports_listing_fix: null }
+            : r.rating >= 4
+            ? { seq: r.seq, rating_bin: 'praise', topic: 'works as expected', severity: null, supports_listing_fix: null }
+            : r.rating <= 2
+            ? { seq: r.seq, rating_bin: 'complaint', topic: 'product failed or misleading', severity: 4, supports_listing_fix: r.body.toLowerCase().includes('size') }
+            : { seq: r.seq, rating_bin: 'scenario', topic: 'usage mismatch', severity: null, supports_listing_fix: null },
+    );
+
+const stubThemes = (tags: Tag[]): Theme[] => {
+    const complaints = tags.filter(t => t.rating_bin === 'complaint');
+    const praises = tags.filter(t => t.rating_bin === 'praise');
+    const seqs = tags.map(t => t.seq);
+    const pick3 = [seqs[0], seqs[1] ?? seqs[0], seqs[2] ?? seqs[0]];
+    return [
+        ...(complaints.length
+            ? [{ theme: 'durability / description mismatch', frequency: complaints.length, severity_avg: 4, sample_seqs: pick3, root_cause: 'quality' as const, listing_action: 'add accurate dimensions and material specs to bullet points' }]
+            : []),
+        ...(praises.length
+            ? [{ theme: 'good value for price', frequency: praises.length, severity_avg: 0, sample_seqs: pick3, root_cause: 'expectation_gap' as const, listing_action: 'highlight value messaging in title' }]
+            : []),
+    ];
+};
+
+const stubReport = (themes: Theme[], n: number): Report => ({
+    executive_summary: `[DRY-RUN 桩数据] 基于 ${n} 条评论，共 ${themes.length} 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。`,
+    top_strengths: themes.filter(t => t.severity_avg === 0).map(t => ({ theme: t.theme, frequency: t.frequency })),
+    top_risks: themes.filter(t => t.severity_avg > 0).map(t => ({ theme: t.theme, frequency: t.frequency })),
+    buyer_personas: ['multi-pet household owner'],
+    listing_rewrite_checklist: ['add accurate dimensions', 'set correct expectations in images'],
+    verdict: 'improve-first',
+});
 
 /* ---------------- Prompts ---------------- */
 
@@ -145,6 +197,11 @@ async function runStage1(reviews: Review[]): Promise<Tag[]> {
     const tags: Tag[] = [];
     for (let i = 0; i < reviews.length; i += BATCH) {
         const batch = reviews.slice(i, i + BATCH);
+        if (DRY_RUN) {
+            tags.push(...stubTags(batch));
+            console.error(`  [stage1/${i / BATCH + 1}] dry-run stub`);
+            continue;
+        }
         // zod 数组嵌套在 json_object 下：让模型包 {"tags": [...]} 再取出
         const out = await callJSON(
             z.object({ tags: z.array(TagSchema).length(batch.length) }),
@@ -164,20 +221,27 @@ async function main() {
     const reviews = z.array(ReviewSchema).parse(Array.isArray(loaded) ? loaded : loaded.reviews);
     const reviewsById = new Map(reviews.map(r => [r.seq, r]));
 
-    console.error(`==> 共 ${reviews.length} 条评论，模型 ${MODEL}`);
+    console.error(`==> 共 ${reviews.length} 条评论，${DRY_RUN ? 'DRY_RUN 桩模式' : `模型 ${MODEL}`}`);
     const t0 = Date.now();
 
     const tags = await runStage1(reviews);
-    const themesOut = await callJSON(
-        z.object({ themes: z.array(ThemeSchema).min(1).max(8) }),
-        stage2Prompt(tags, reviewsById),
-        'stage2',
-    );
-    const report: Report = await callJSON(ReportSchema, stage3Prompt(themesOut.themes, reviews.length), 'stage3');
+    const themes: Theme[] = DRY_RUN
+        ? stubThemes(tags)
+        : (await callJSON(
+              z.object({ themes: z.array(ThemeSchema).min(1).max(8) }),
+              stage2Prompt(tags, reviewsById),
+              'stage2',
+          )).themes;
+    const report: Report = DRY_RUN
+        ? stubReport(themes, reviews.length)
+        : await callJSON(ReportSchema, stage3Prompt(themes, reviews.length), 'stage3');
 
-    const cost =
-        (totalTokens.input / 1e6) * PRICE.input + (totalTokens.output / 1e6) * PRICE.output;
-    const out = { meta: { model: MODEL, reviewCount: reviews.length, cost_usd: +cost.toFixed(4), tokens: totalTokens }, report, themes: themesOut.themes };
+    const cost = (totalTokens.input / 1e6) * PRICE.input + (totalTokens.output / 1e6) * PRICE.output;
+    const out = {
+        meta: { model: DRY_RUN ? 'dry-run-stub' : MODEL, reviewCount: reviews.length, cost_usd: +cost.toFixed(4), tokens: totalTokens },
+        report,
+        themes,
+    };
     writeFileSync('report.json', JSON.stringify(out, null, 2));
     console.error(`==> 完成 ${((Date.now() - t0) / 1000).toFixed(1)}s，成本约 $${cost.toFixed(4)}，已写入 report.json`);
     console.log(JSON.stringify(out.report, null, 2));
