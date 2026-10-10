@@ -1,7 +1,7 @@
 # RESUME.md — 会话恢复指南（新会话/未来的我先读这个）
 
-> 最后更新：2026-10-10 17:30 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
-> 位置：`~/Documents/projects/voc-tool`（独立 git 仓库，与公司 mini-app-admin 无关）
+> 最后更新：2026-10-10 19:40 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
+> 位置：`~/Documents/projects/voc-tool`（GitHub 私有仓库：git@github.com:zhaochangji/voc-tool.git，SSH 已配好）
 
 ## 一句话现状
 
@@ -64,14 +64,14 @@ npx tsc --noEmit                                            # 类型检查
 
 ## 已知未修问题
 
-- **Strengths 混淆**：Stage3 的 `top_strengths` 会混入抱怨主题（原因：Stage2 只聚了抱怨主题，好评主题没输出）。修法：Stage2 prompt 强制"抱怨主题组 + 好评主题组各至少 1 组"，或 Stage3 输入时给 theme 加 kind 标记
+（暂无 —— Strengths 混淆已于 2026-10-10 修复：主题加 kind 双组聚类，验证通过：优点栏=Quiet operation/Stainless steel hygiene/Large capacity，风险栏=Pump clogging/Water noise/Pump failure）
 
 ## Phase 2 待办（下一步，按此顺序）
 
 1. 发帖文案：知无不言/创蓝《免费帮 20 位卖家分析竞品差评》+ Reddit r/FulfillmentByAmazon 英文版
-2. 先修 Strengths bug（发帖展示的报告要准确）——约 30 分钟工作量
-3. 收集 20 内测用户，目标 7 人主动问付费
-4. Web UI（Next.js + Vercel + Supabase 免费层）可以等有内测用户反馈再做
+2. 收集 20 内测用户，目标 7 人主动问付费
+3. Web UI（Next.js + Vercel + Supabase 免费层）可以等有内测用户反馈再做
+4. Prompt 调优：跑 3 个不同类目 ASIN，对比打标准确率（当前仅验证过宠物用品类）
 
 ## 90 天路线速查
 
