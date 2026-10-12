@@ -95,7 +95,7 @@ const server = http.createServer(async (req, res) => {
     const url = (req.url || '/').split('?')[0];
     if (req.method === 'GET' && (url === '/' || url === '/index.html')) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        res.end(page(existsSync(path.join(CWD, 'report.html'))));
+        res.end(page());
         return;
     }
     if (req.method === 'GET' && url === '/report.html' && existsSync(path.join(CWD, 'report.html'))) {
