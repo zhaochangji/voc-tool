@@ -68,7 +68,7 @@ Context: I'm an indie dev validating a product idea. Not a pitch — you get a f
 - **Every theme cites the actual reviews it's based on** (click and read the original text — no black-box AI claims)
 - Root-cause labels (quality / size mismatch / listing-misleading / expectation gap)
 - A prioritized listing rewrite checklist
-- Bilingual output (EN/中文 toggle)
+- Clean single-page HTML report you can share with your team
 
 **Example — SanDisk High Endurance 256GB (B07P4HBRMV, ~5k+ ratings):**
 
@@ -82,7 +82,13 @@ Happy to answer questions about how it works (data comes from a licensed scrapin
 
 ---
 
-*（发帖后准备一条置顶自答评论：data source、是否存储数据、为什么免费——透明度在 Reddit 是生死线）*
+**发帖后立即以楼主身份回帖的 FAQ 评论（直接复制）：**
+
+> **FAQ, answering up front:**
+> - **Where does the data come from?** A licensed scraping API (paid per result). I'm not hitting Amazon directly.
+> - **Do you store my ASINs or ask for email?** No. Report is generated on demand and nothing is tied to you — just drop the ASIN in the comments.
+> - **Why free?** I'm validating whether this workflow is useful before building anything bigger. Your feedback IS the payment.
+> - **What if my product has few reviews?** Below ~200 ratings the report gets thin — I'll tell you the ASIN isn't a good fit rather than send you junk.
 
 ## 三、发帖执行手册
 
