@@ -15,7 +15,7 @@ const CWD = process.cwd();
 
 let running = false;
 
-function page(body: string) {
+function page(_body?: string) {
     return `<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VOC 报告生成器</title>
 <style>

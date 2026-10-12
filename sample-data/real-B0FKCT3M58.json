@@ -2,9 +2,9 @@
   "meta": {
     "provider": "apify",
     "actor": "jdtpnjtp~amazon-reviews",
-    "items": 15,
+    "items": 7,
     "asin": "B0FKCT3M58",
-    "collectedAt": "2026-10-12T03:39:43.750Z",
+    "collectedAt": "2026-10-12T08:09:24.794Z",
     "partial": false
   },
   "reviews": [
@@ -64,114 +64,26 @@
       "seq": 5
     },
     {
-      "rating": 5,
-      "verified": true,
-      "title": "Great earbuds!",
-      "body": "Great earbuds..",
-      "review_id": "Jon Gauthier|October 4, 2026|Great earbuds!",
-      "review_date": "October 4, 2026",
-      "sentiment": "positive",
+      "rating": 3,
+      "verified": false,
+      "title": "Adequate",
+      "body": "OK for 25.00 JBL App is horrendous",
+      "review_id": "Kevin C. Camp|October 1, 2026|Adequate",
+      "review_date": "October 1, 2026",
+      "sentiment": "critical",
       "helpful": 0,
       "seq": 6
     },
     {
-      "rating": 5,
+      "rating": 3,
       "verified": true,
-      "title": "Love My JBL Vibes",
-      "body": "Great range and outside noise gone when you have them on. Well worth the money. I charged the battery on Sunday and didn't recharge them again until this Sunday only because I'm getting them ready for another week of work.",
-      "review_id": "Roberta Taylor|August 9, 2026|Love My JBL Vibes",
-      "review_date": "August 9, 2026",
-      "sentiment": "positive",
+      "title": "Not impressed",
+      "body": "Easy to install but sound is a little tinny. Too much treble. I have had many JBL earbuds before. I was not impressed.",
+      "review_id": "Janet Grant|July 17, 2026|Not impressed",
+      "review_date": "July 17, 2026",
+      "sentiment": "critical",
       "helpful": 0,
       "seq": 7
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "Good product",
-      "body": "Very nice product I love it, I wanted to get this for awhile already",
-      "review_id": "Amazon Customer|August 4, 2026|Good product",
-      "review_date": "August 4, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 8
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "Toss those AirPods away!",
-      "body": "Outstanding quality! Hands down recommend! I have air pods and I will definitely be throwing them away!",
-      "review_id": "russell vannoy|August 1, 2026|Toss those AirPods away!",
-      "review_date": "August 1, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 9
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "Good quality",
-      "body": "Very good sound quality for the money. Pretty decent bass response. I wasn't too keen on the app, but it's actually pretty handy and I like that it has an equalizer.",
-      "review_id": "Serapus|August 1, 2026|Good quality",
-      "review_date": "August 1, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 10
-    },
-    {
-      "rating": 5,
-      "verified": false,
-      "title": "Great 40$ earbuds",
-      "body": "Had the original jbl vibe beam and they did the job great, a bit bulkier than these ones, lost one of them so bought a pair of skull candy's that were almost too sleek to the point of being difficult to take out of the case. The skullcandys would however shift off the charging contacts and connect to my phone at random times especially when I'm on a phonecall leading to much frustration. These are secure easy to handle and case is very pocketable. Sound quality is clear and defined, plenty of bass but not overly eq'd, balanced and adequate. Good for a beater pair of cheapies that I'll probably lose 1 within a year",
-      "review_id": "S. Chamberland|July 25, 2026|Great 40$ earbuds",
-      "review_date": "July 25, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 11
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "Ear buds",
-      "body": "Good product…",
-      "review_id": "laurie keretz|July 14, 2026|Ear buds",
-      "review_date": "July 14, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 12
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "I would recommend!",
-      "body": "My kids love these, good quality, batteries last good, fits right, sounds good too!",
-      "review_id": "djkarp|July 12, 2026|I would recommend!",
-      "review_date": "July 12, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 13
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "Ear itch",
-      "body": "Good headphone. Gave it me the ear itch but good sound. Yes buy again",
-      "review_id": "Parker Johnson|May 12, 2026|Ear itch",
-      "review_date": "May 12, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 14
-    },
-    {
-      "rating": 5,
-      "verified": true,
-      "title": "Bueno",
-      "body": "Excelentes recomendados",
-      "review_id": "Jorge luis|May 5, 2026|Bueno",
-      "review_date": "May 5, 2026",
-      "sentiment": "positive",
-      "helpful": 0,
-      "seq": 15
     }
   ]
 }
