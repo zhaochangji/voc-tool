@@ -138,7 +138,7 @@ async function pangolinCollect(asin: string, critical: number, positive: number,
 
 /* ================= 供应商 2：Apify（免费额度，测试期主用） ================= */
 
-const APIFY_ACTOR = process.env.APIFY_ACTOR || 'web_wanderer~amazon-reviews-extractor';
+const APIFY_ACTOR = process.env.APIFY_ACTOR || 'jdtpnjtp~amazon-reviews'; // 实测可用；web_wanderer 在免费账号拿不到数据
 
 async function apifyCollect(asin: string, critical: number, positive: number, collected: CollectedReview[]) {
     const TOKEN = process.env.APIFY_TOKEN || '';
