@@ -1,6 +1,6 @@
 # RESUME.md — 会话恢复指南（新会话/未来的我先读这个）
 
-> 最后更新：2026-10-12 11:55 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
+> 最后更新：2026-10-12 16:55 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
 > 位置：`~/Documents/projects/voc-tool`（GitHub 私有仓库：git@github.com:zhaochangji/voc-tool.git，SSH 已配好）
 
 ## 一句话现状
@@ -66,7 +66,22 @@ npx tsc --noEmit                                            # 类型检查
 
 （暂无 —— Strengths 混淆已于 2026-10-10 修复：主题加 kind 双组聚类，验证通过：优点栏=Quiet operation/Stainless steel hygiene/Large capacity，风险栏=Pump clogging/Water noise/Pump failure）
 
-## 已完成里程碑（2026-10-12 补记）
+## 最新里程碑（2026-10-12 下午）
+
+- [x] **Web UI 完成**：`npm run web` → localhost:8787 → 输入 ASIN 一键出双语报告（编排 CLI，串行锁，端到端已验证）
+- [x] 渠道策略修订：知无不言付费墙放弃；Reddit 发帖被 Rule 2 拦 → 改 A/B 双路（B=纯案例帖先行，A=modmail 申请）；AMZ123 反广告拦截 → 降敏版纯案例帖
+- [x] 3 星中评批次补齐（three_star，验证挖出价格/配送/包装 3 个新主题）
+- [x] 竞品分析 COMPETITORS.md、POSTS.md 发帖文案包（含执行手册）
+- [x] 跨类目验证 4 个：宠物×2 / 耳机（薄样本）/ 存储卡（大样本，最佳）
+
+## 当前策略（2026-10-12 定）
+
+**社区获客遇阻（知无不言付费墙/Reddit Rule2/AMZ123 反广告）→ 转向：Web UI + 闲鱼卖服务先行。**
+- 闲鱼挂单：单份 ¥9.9-19.9，买3送1；买家发 ASIN → Web UI 跑 → 发 report.html（或转PDF）
+- 边际成本 ¥0.5/单；收款信任层用闲鱼本身，不建支付系统
+- 社区渠道不放弃：养号中的 AMZ123 继续，Reddit B 路案例帖照发（纯干货不引流）
+
+## 改进清单（Backlog）
 
 - [x] 免费采集链路打通：Apify jdtpnjtp/amazon-reviews（web_wanderer 免费版不可用，勿回头）
 - [x] 报告双语一键切换（管线双语言生成 + render 切换按钮）
@@ -77,7 +92,7 @@ npx tsc --noEmit                                            # 类型检查
 
 ## 改进清单（Backlog）
 
-1. 3 星中评缺失（jdtpnjtp critical 只有 1-2 星）——starFilter=all_stars 本地分流可解
+1. ~~3 星中评缺失~~ ✅ 已修（three_star 批次）
 2. report.html 打印/PDF 按钮
 3. 卖家精灵/Shulex 亲测（对比图+定价核实）
 4. Key 轮换（Apify/DeepSeek/Pangolinfo 均在聊天暴露过）
