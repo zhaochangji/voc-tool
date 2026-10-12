@@ -133,7 +133,7 @@ async function pangolinCollect(asin: string, critical: number, positive: number,
 const APIFY_ACTOR = process.env.APIFY_ACTOR || 'jdtpnjtp~amazon-reviews';
 
 /** 单次运行：starFilter 定向差评/好评，maxReviewsPerAsin 控制条数 */
-async function apifyRun(asin: string, rating: 'critical' | 'positive', count: number): Promise<any[]> {
+async function apifyRun(asin: string, starFilter: 'critical' | 'three_star' | 'positive', count: number): Promise<any[]> {
     const TOKEN = process.env.APIFY_TOKEN || '';
     if (!TOKEN) throw new Error('缺少 APIFY_TOKEN（.env）——注册 apify.com 后在 Settings → API & Integrations 复制');
     if (count <= 0) return [];
@@ -144,11 +144,11 @@ async function apifyRun(asin: string, rating: 'critical' | 'positive', count: nu
         : {
               products: [asin],
               country: 'us',
-              starFilter: rating,
+              starFilter,
               sort: 'helpful',
               maxReviewsPerAsin: count,
           };
-    console.error(`  [apify] ${rating} 目标 ${count} 条…`);
+    console.error(`  [apify] starFilter=${starFilter} 目标 ${count} 条…`);
     const res = await fetch(
         `https://api.apify.com/v2/acts/${APIFY_ACTOR}/run-sync-get-dataset-items?token=${TOKEN}&timeout=300`,
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) },
@@ -163,11 +163,17 @@ async function apifyRun(asin: string, rating: 'critical' | 'positive', count: nu
 }
 
 async function apifyCollect(asin: string, critical: number, positive: number, collected: CollectedReview[]) {
-    const batches: Array<['critical' | 'positive', number]> = [['critical', critical * 10], ['positive', positive * 10]];
+    // 批次设计：critical=1-2星（最狠差评）+ three_star=3星中评（"很喜欢但是…"，VOC 价值密度最高）+ positive=4-5星
+    // 3 星配额 = 差评量的 1/3（至少 5 条）
+    const batches: Array<{ starFilter: 'critical' | 'three_star' | 'positive'; count: number; sentiment: 'critical' | 'positive' }> = [
+        { starFilter: 'critical', count: critical * 10, sentiment: 'critical' },
+        { starFilter: 'three_star', count: Math.max(5, Math.ceil((critical * 10) / 3)), sentiment: 'critical' },
+        { starFilter: 'positive', count: positive * 10, sentiment: 'positive' },
+    ];
     let totalItems = 0;
     const seen = new Set<string>();
-    for (const [rating, count] of batches) {
-        const items = await apifyRun(asin, rating, count);
+    for (const b of batches) {
+        const items = await apifyRun(asin, b.starFilter, b.count);
         totalItems += items.length;
         for (const it of items) {
             // jdtpnjtp 无 reviewId 字段，用 作者|日期|标题 组合键去重
@@ -177,8 +183,8 @@ async function apifyCollect(asin: string, critical: number, positive: number, co
             const rt = Number(it.rating) || 0;
             // 双保险：starFilter 失效时按星级本地再分流
             const isCrit = rt <= 3;
-            if (rating === 'critical' && !isCrit) continue;
-            if (rating === 'positive' && isCrit) continue;
+            if (b.sentiment === 'critical' && !isCrit) continue;
+            if (b.sentiment === 'positive' && isCrit) continue;
             collected.push({
                 rating: rt,
                 verified: it.verified_purchase === true,
@@ -186,7 +192,7 @@ async function apifyCollect(asin: string, critical: number, positive: number, co
                 body: it.text || '',
                 review_id: id,
                 review_date: it.date || '',
-                sentiment: isCrit ? 'critical' : 'positive',
+                sentiment: b.sentiment,
                 helpful: it.helpful_count ?? undefined,
             });
         }
