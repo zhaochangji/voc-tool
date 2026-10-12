@@ -224,6 +224,10 @@ async function runStage1(reviews: Review[]): Promise<Tag[]> {
 async function main() {
     const inputPath = process.argv[2];
     if (!inputPath) throw new Error('用法: npm run analyze -- <reviews.json>');
+    if (process.argv.length > 3) {
+        console.error(`==> ⚠️ 检测到多个文件，只分析第一个（${inputPath}），忽略: ${process.argv.slice(3).join(', ')}`);
+        console.error('==> 提示: 不要用 real-*.json 通配符，传完整文件名；先用 render 渲染网页报告');
+    }
     const loaded = JSON.parse(readFileSync(inputPath, 'utf-8'));
     // 兼容 collect.ts 产物（{meta, reviews}）与裸数组两种格式
     const reviews = z.array(ReviewSchema).parse(Array.isArray(loaded) ? loaded : loaded.reviews);
