@@ -106,6 +106,7 @@ const pageBody = (lang: 'zh' | 'en') => {
       <button class="lang-btn ${lang === 'zh' ? 'active' : ''}" data-lang="zh" onclick="setLang('zh')">中</button>
       <button class="lang-btn ${lang === 'en' ? 'active' : ''}" data-lang="en" onclick="setLang('en')">EN</button>
     </div>
+    <button class="print-btn" onclick="window.print()">${lang === 'zh' ? '📄 导出 PDF' : '📄 Save as PDF'}</button>
     <h1>${esc(prodMeta.title ?? 'Amazon Product')} ${prodMeta.star ? `<span style="font-size:14px;color:#fbbf24">★ ${esc(prodMeta.star)}</span>` : ''}</h1>
     <div class="sub">ASIN ${esc(prodMeta.asin)} · ${prodMeta.reviewCount ?? report.meta.reviewCount} ${L.reviews(reviews.length, nPos)} · ${new Date().toLocaleString('zh-CN')}</div>
     <div><span class="verdict ${v[1]}">${v[0]}</span><span class="verdict-note">${v[2]}</span></div>
@@ -155,6 +156,14 @@ const html = `<!DOCTYPE html>
   .lang-toggle { position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,.12); border-radius: 999px; padding: 3px; display: flex; gap: 3px; }
   .lang-btn { border: 0; background: transparent; color: #d1d5db; font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 999px; cursor: pointer; }
   .lang-btn.active { background: #fff; color: #111827; }
+  .print-btn { position: absolute; top: 24px; right: 140px; border: 0; background: rgba(255,255,255,.12); color: #d1d5db; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+  .print-btn:hover { background: rgba(255,255,255,.22); }
+  @media print {
+    .lang-toggle, .print-btn { display: none !important; }
+    body { background: #fff; }
+    .card, .quote, .summary { break-inside: avoid; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
   @media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
   .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
@@ -202,6 +211,7 @@ function setLang(l) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
   window.scrollTo({ top: 0 });
 }
+window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
 </script>
 </body>
 </html>`;

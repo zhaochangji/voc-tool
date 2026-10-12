@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VOC Report · B0FKCT3M58</title>
+<title>VOC Report · B07P4HBRMV</title>
 <style>
   :root { --red:#dc2626; --redbg:#fef2f2; --green:#16a34a; --greenbg:#f0fdf4; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,6 +17,14 @@
   .lang-toggle { position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,.12); border-radius: 999px; padding: 3px; display: flex; gap: 3px; }
   .lang-btn { border: 0; background: transparent; color: #d1d5db; font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 999px; cursor: pointer; }
   .lang-btn.active { background: #fff; color: #111827; }
+  .print-btn { position: absolute; top: 24px; right: 140px; border: 0; background: rgba(255,255,255,.12); color: #d1d5db; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+  .print-btn:hover { background: rgba(255,255,255,.22); }
+  @media print {
+    .lang-toggle, .print-btn { display: none !important; }
+    body { background: #fff; }
+    .card, .quote, .summary { break-inside: avoid; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
   @media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
   .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
@@ -60,8 +68,9 @@
       <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中</button>
       <button class="lang-btn " data-lang="en" onclick="setLang('en')">EN</button>
     </div>
+    <button class="print-btn" onclick="window.print()">📄 导出 PDF</button>
     <h1>Amazon Product </h1>
-    <div class="sub">ASIN B0FKCT3M58 · 7 条评论 · 分析 7 条（差评 7 / 好评 0） · 2026/10/12 16:09:37</div>
+    <div class="sub">ASIN B07P4HBRMV · 7 条评论 · 分析 50 条（差评 40 / 好评 10） · 2026/10/12 17:02:05</div>
     <div><span class="verdict warn">⚠️ 先改后卖</span><span class="verdict-note">存在可改进的结构性缺陷，入场前先解决</span></div>
   </header>
 
@@ -93,16 +102,16 @@
       </div>
       <details open><summary>引用的原评论 (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">No se conecta</span> <span class="qmeta">✓ 已验证购买 · August 8, 2026</span></div>
-        <div class="qbody">No funciona uno no se conecta</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">No funcionó</span> <span class="qmeta">✓ 已验证购买 · October 10, 2026</span></div>
+        <div class="qbody">Una de las memorias que compré no funcionó</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">L</span> <span class="qmeta">✓ 已验证购买 · February 13, 2026 · 1 人觉得有用</span></div>
-        <div class="qbody">Bought em for snow boarding One barely works and the other sound like its under water</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">1 worked, 1 didn&#39;t</span> <span class="qmeta">✓ 已验证购买 · October 3, 2026 · 2 人觉得有用</span></div>
+        <div class="qbody">Bought 2 cards at the same time, only 1 worked.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Garbage</span> <span class="qmeta">未验证 · August 6, 2026 · 1 人觉得有用</span></div>
-        <div class="qbody">These things suck. I was really disappointed considering I like my jbl speakers so much. Definitely won’t buy any more of their ear buds though.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Inflation Criminals</span> <span class="qmeta">✓ 已验证购买 · October 7, 2026</span></div>
+        <div class="qbody">Overall not a bad product. However Sandisk have forced me to purchase other brands as the cost has gone from $22.99 in July of 2025 to $69.99 in 10/2026. That’s on “sale” too, lucky me! Companies must understand we will not support their manufactured inflation. You betray the consumer? The consumer chooses your competition. This is the free market they have built and we must leverage it like they …</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -118,8 +127,8 @@
       </div>
       <details open><summary>引用的原评论 (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Would not recommend unless you like to listen to static</span> <span class="qmeta">未验证 · July 26, 2026 · 1 人觉得有用</span></div>
-        <div class="qbody">Have an automatic ambient sound mode that can&#39;t be disabled. Sounds like extremely loud white noise/static that overpowers whatever you try to listen to. Apparently it&#39;s a default design feature that isn&#39;t advertised.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">died</span> <span class="qmeta">✓ 已验证购买 · October 6, 2026</span></div>
+        <div class="qbody">died after 3 years of use in my dashcam. oregon weather so no insane heat or cold</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -135,8 +144,8 @@
       </div>
       <details open><summary>引用的原评论 (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★★★☆☆</span> <span class="qtitle">Not impressed</span> <span class="qmeta">✓ 已验证购买 · July 17, 2026</span></div>
-        <div class="qbody">Easy to install but sound is a little tinny. Too much treble. I have had many JBL earbuds before. I was not impressed.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">I&#39;m upset...</span> <span class="qmeta">✓ 已验证购买 · September 26, 2026 · 1 人觉得有用</span></div>
+        <div class="qbody">My first flash drive died in less than a month. I requested a reliable replacement, but the new one was left in the mailbox where I couldn&#39;t find it (despite clear instructions to leave it at my door). Now I&#39;m left with nothing—no working drive and no option for a refund since the status shows as delivered.</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -152,8 +161,8 @@
       </div>
       <details open><summary>引用的原评论 (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★★★☆☆</span> <span class="qtitle">Adequate</span> <span class="qmeta">未验证 · October 1, 2026</span></div>
-        <div class="qbody">OK for 25.00 JBL App is horrendous</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not good</span> <span class="qmeta">✓ 已验证购买 · October 1, 2026 · 1 人觉得有用</span></div>
+        <div class="qbody">Not good at all It went totally blank in less than three months after being installed in the phone Nothing shows not even the card is identified I tried the laptop and still nothing I loss all my data All my information stored on the card totally gone</div>
       </blockquote></details>
     </div>
 
@@ -170,8 +179,9 @@
       <button class="lang-btn " data-lang="zh" onclick="setLang('zh')">中</button>
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
     </div>
+    <button class="print-btn" onclick="window.print()">📄 Save as PDF</button>
     <h1>Amazon Product </h1>
-    <div class="sub">ASIN B0FKCT3M58 · 7 ratings · analyzed 7 reviews (7 critical / 0 positive) · 2026/10/12 16:09:37</div>
+    <div class="sub">ASIN B07P4HBRMV · 7 ratings · analyzed 50 reviews (40 critical / 10 positive) · 2026/10/12 17:02:05</div>
     <div><span class="verdict warn">⚠️ Improve First</span><span class="verdict-note">Fixable structural flaws, address before selling</span></div>
   </header>
 
@@ -203,16 +213,16 @@
       </div>
       <details open><summary>Cited reviews (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">No se conecta</span> <span class="qmeta">✓ Verified Purchase · August 8, 2026</span></div>
-        <div class="qbody">No funciona uno no se conecta</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">No funcionó</span> <span class="qmeta">✓ Verified Purchase · October 10, 2026</span></div>
+        <div class="qbody">Una de las memorias que compré no funcionó</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">L</span> <span class="qmeta">✓ Verified Purchase · February 13, 2026 · 1 found helpful</span></div>
-        <div class="qbody">Bought em for snow boarding One barely works and the other sound like its under water</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">1 worked, 1 didn&#39;t</span> <span class="qmeta">✓ Verified Purchase · October 3, 2026 · 2 found helpful</span></div>
+        <div class="qbody">Bought 2 cards at the same time, only 1 worked.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Would not recommend unless you like to listen to static</span> <span class="qmeta">Unverified · July 26, 2026 · 1 found helpful</span></div>
-        <div class="qbody">Have an automatic ambient sound mode that can&#39;t be disabled. Sounds like extremely loud white noise/static that overpowers whatever you try to listen to. Apparently it&#39;s a default design feature that isn&#39;t advertised.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">died</span> <span class="qmeta">✓ Verified Purchase · October 6, 2026</span></div>
+        <div class="qbody">died after 3 years of use in my dashcam. oregon weather so no insane heat or cold</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -228,8 +238,8 @@
       </div>
       <details open><summary>Cited reviews (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Would not recommend unless you like to listen to static</span> <span class="qmeta">Unverified · July 26, 2026 · 1 found helpful</span></div>
-        <div class="qbody">Have an automatic ambient sound mode that can&#39;t be disabled. Sounds like extremely loud white noise/static that overpowers whatever you try to listen to. Apparently it&#39;s a default design feature that isn&#39;t advertised.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">died</span> <span class="qmeta">✓ Verified Purchase · October 6, 2026</span></div>
+        <div class="qbody">died after 3 years of use in my dashcam. oregon weather so no insane heat or cold</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -245,8 +255,8 @@
       </div>
       <details open><summary>Cited reviews (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★★★☆☆</span> <span class="qtitle">Not impressed</span> <span class="qmeta">✓ Verified Purchase · July 17, 2026</span></div>
-        <div class="qbody">Easy to install but sound is a little tinny. Too much treble. I have had many JBL earbuds before. I was not impressed.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">I&#39;m upset...</span> <span class="qmeta">✓ Verified Purchase · September 26, 2026 · 1 found helpful</span></div>
+        <div class="qbody">My first flash drive died in less than a month. I requested a reliable replacement, but the new one was left in the mailbox where I couldn&#39;t find it (despite clear instructions to leave it at my door). Now I&#39;m left with nothing—no working drive and no option for a refund since the status shows as delivered.</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -262,8 +272,8 @@
       </div>
       <details open><summary>Cited reviews (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★★★☆☆</span> <span class="qtitle">Adequate</span> <span class="qmeta">Unverified · October 1, 2026</span></div>
-        <div class="qbody">OK for 25.00 JBL App is horrendous</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not good</span> <span class="qmeta">✓ Verified Purchase · October 1, 2026 · 1 found helpful</span></div>
+        <div class="qbody">Not good at all It went totally blank in less than three months after being installed in the phone Nothing shows not even the card is identified I tried the laptop and still nothing I loss all my data All my information stored on the card totally gone</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
@@ -279,8 +289,8 @@
       </div>
       <details open><summary>Cited reviews (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Garbage</span> <span class="qmeta">Unverified · August 6, 2026 · 1 found helpful</span></div>
-        <div class="qbody">These things suck. I was really disappointed considering I like my jbl speakers so much. Definitely won’t buy any more of their ear buds though.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Inflation Criminals</span> <span class="qmeta">✓ Verified Purchase · October 7, 2026</span></div>
+        <div class="qbody">Overall not a bad product. However Sandisk have forced me to purchase other brands as the cost has gone from $22.99 in July of 2025 to $69.99 in 10/2026. That’s on “sale” too, lucky me! Companies must understand we will not support their manufactured inflation. You betray the consumer? The consumer chooses your competition. This is the free market they have built and we must leverage it like they …</div>
       </blockquote></details>
     </div>
 
@@ -299,6 +309,7 @@ function setLang(l) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
   window.scrollTo({ top: 0 });
 }
+window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
 </script>
 </body>
 </html>
