@@ -2,182 +2,374 @@
   "meta": {
     "model": "deepseek-chat",
     "reviewCount": 40,
-    "cost_usd": 0.0029,
+    "cost_usd": 0.0043,
     "tokens": {
-      "input": 5925,
-      "output": 2922
-    }
+      "input": 9101,
+      "output": 4239
+    },
+    "langs": [
+      "zh",
+      "en"
+    ]
   },
   "report": {
-    "executive_summary": "最大风险是牙齿损伤、锋利边缘和塑料碎片误食等安全问题，可能导致高额兽医费用和差评，严重损害品牌信誉。最大机会在于产品被部分狗狗喜爱且耐咬，可针对合适犬种和咀嚼强度进行精准营销。建议先改进质量与警示，再考虑销售。",
-    "top_strengths": [
-      {
-        "theme": "持久耐咬，狗狗喜爱",
-        "frequency": 4
-      },
-      {
-        "theme": "挑食狗也爱啃",
-        "frequency": 2
-      },
-      {
-        "theme": "狗狗最爱，最佳咀嚼骨",
-        "frequency": 2
-      }
-    ],
-    "top_risks": [
-      {
-        "theme": "牙齿损伤与高额兽医费用",
-        "frequency": 5
-      },
-      {
-        "theme": "塑料碎片误食引发健康问题",
-        "frequency": 5
-      },
-      {
-        "theme": "锋利边缘导致口腔受伤",
-        "frequency": 4
-      }
-    ],
-    "buyer_personas": [
-      "养有强力咀嚼犬只的宠物主人，担心产品安全性和耐用性。",
-      "养有挑食狗狗的宠物主人，寻找狗狗喜欢的咀嚼玩具。",
-      "注重性价比的中小卖家，希望找到质量可靠且差评少的产品。"
-    ],
-    "listing_rewrite_checklist": [
-      "在包装和详情页明确标注“不适用于有牙齿问题或强力咀嚼的犬只”，并建议咨询兽医。",
-      "在 listing 中强调“本产品非可食用，若被咬碎请立即丢弃”，并建议在监督下使用。",
-      "改进生产工艺去除毛边，并在 listing 中增加“使用前检查，若出现锋利边缘请停止使用”的警示。",
-      "在 listing 中明确标注“不适合强力咀嚼者”，并推荐适合的咀嚼强度等级。",
-      "在 listing 中增加“并非所有狗都喜欢，建议先购买小尺寸试口”的说明，并强调培根风味可能因批次而异。",
-      "提供精确的尺寸对比图，并明确标注不同口味/尺寸的实际大小，避免“同一尺寸”的误解。"
-    ],
-    "verdict": "improve-first"
-  },
-  "themes": [
-    {
-      "kind": "risk",
-      "theme": "牙齿损伤与高额兽医费用",
-      "frequency": 5,
-      "severity_avg": 5,
-      "sample_seqs": [
-        3,
-        6,
-        21
+    "zh": {
+      "executive_summary": "最大风险是尖锐边缘与口腔伤害（6次，严重度4.83）及牙齿断裂与高额兽医费用（5次，严重度5），可能引发高额赔偿和差评。最大机会是狗狗喜爱与持久耐咬（6次）以及长期回购与高性价比（2次），可强化正面口碑。建议优先改进产品安全并调整listing预期，再放大优势卖点。",
+      "top_strengths": [
+        {
+          "theme": "狗狗喜爱与持久耐咬",
+          "frequency": 6
+        },
+        {
+          "theme": "挑食犬也接受",
+          "frequency": 2
+        },
+        {
+          "theme": "长期回购与高性价比",
+          "frequency": 2
+        }
       ],
-      "root_cause": "quality",
-      "listing_action": "在包装和详情页明确标注“不适用于有牙齿问题或强力咀嚼的犬只”，并建议咨询兽医。"
+      "top_risks": [
+        {
+          "theme": "尖锐边缘与口腔伤害",
+          "frequency": 6
+        },
+        {
+          "theme": "牙齿断裂与高额兽医费用",
+          "frequency": 5
+        },
+        {
+          "theme": "塑料碎屑脱落与误食风险",
+          "frequency": 5
+        }
+      ],
+      "buyer_personas": [
+        "养有幼犬或强力啃咬犬的主人，担心玩具伤害狗狗口腔和牙齿，愿意为安全支付溢价。",
+        "养有挑食犬的主人，希望找到狗狗感兴趣且能长时间啃咬的玩具，重视性价比和回购价值。",
+        "注重产品耐用性和尺寸匹配的买家，会仔细查看尺寸表和材质说明，避免误食和噪音问题。"
+      ],
+      "listing_rewrite_checklist": [
+        "在详情页明确标注适用咬合强度与更换周期，并增加边缘打磨工艺说明；若无法保证安全则标注不适用于幼犬及强力啃咬犬。",
+        "在listing中明确硬度等级并警示不适用于已有牙损或强力啃咬犬，建议补充兽医推荐的使用时长限制。",
+        "在详情页增加材质安全说明与啃咬后检查提示，明确出现碎屑应立即停用；若材质无法改进则标注not_fixable_by_listing。",
+        "在listing中弱化'培根香味'承诺，改为'部分犬只可能不感兴趣'的提示，并建议提供小规格试用装。",
+        "在listing中按咬合强度分级推荐，明确强力啃咬犬不适用，并标注预期使用寿命。",
+        "修正尺寸对照表，确保不同口味/规格的实际尺寸与标注一致，并增加实物对比图。",
+        "在listing中提供更精确的尺寸对比图与适用犬种体重范围，并说明在地板上使用的噪音情况。"
+      ],
+      "verdict": "improve-first"
     },
-    {
-      "kind": "risk",
-      "theme": "锋利边缘导致口腔受伤",
-      "frequency": 4,
-      "severity_avg": 4.75,
-      "sample_seqs": [
-        1,
-        12,
-        28
+    "en": {
+      "executive_summary": "The biggest risk is tooth damage and veterinary injury from strong chewers, which can lead to costly returns and negative reviews. The biggest opportunity is leveraging long-lasting entertainment and picky dog approval to attract repeat buyers. Overall, the product has strong appeal but requires safety warnings and durability adjustments to reduce risk.",
+      "top_strengths": [
+        {
+          "theme": "Long-Lasting Entertainment",
+          "frequency": 4
+        },
+        {
+          "theme": "Picky Dogs Approval",
+          "frequency": 3
+        },
+        {
+          "theme": "Overall Customer Satisfaction",
+          "frequency": 2
+        }
       ],
-      "root_cause": "quality",
-      "listing_action": "改进生产工艺去除毛边，并在 listing 中增加“使用前检查，若出现锋利边缘请停止使用”的警示。"
-    },
-    {
-      "kind": "risk",
-      "theme": "塑料碎片误食引发健康问题",
-      "frequency": 5,
-      "severity_avg": 4.6,
-      "sample_seqs": [
-        2,
-        7,
-        8
+      "top_risks": [
+        {
+          "theme": "Tooth Damage and Veterinary Injury",
+          "frequency": 6
+        },
+        {
+          "theme": "Plastic Ingestion and Illness",
+          "frequency": 5
+        },
+        {
+          "theme": "Durability Failure and Breakage",
+          "frequency": 5
+        }
       ],
-      "root_cause": "quality",
-      "listing_action": "在 listing 中强调“本产品非可食用，若被咬碎请立即丢弃”，并建议在监督下使用。"
-    },
-    {
-      "kind": "risk",
-      "theme": "狗对产品无兴趣",
-      "frequency": 8,
-      "severity_avg": 1.75,
-      "sample_seqs": [
-        4,
-        10,
-        11
+      "buyer_personas": [
+        "A budget-conscious dog owner with a strong chewer looking for durable toys but concerned about safety.",
+        "A pet parent of a picky dog seeking an engaging chew that provides long-lasting entertainment.",
+        "A cautious buyer who reads reviews and prioritizes product safety and material quality."
       ],
-      "root_cause": "expectation_gap",
-      "listing_action": "在 listing 中增加“并非所有狗都喜欢，建议先购买小尺寸试口”的说明，并强调培根风味可能因批次而异。"
-    },
-    {
-      "kind": "risk",
-      "theme": "尺寸不符与误导",
-      "frequency": 2,
-      "severity_avg": 3,
-      "sample_seqs": [
-        16,
-        20
+      "listing_rewrite_checklist": [
+        "Add explicit warnings about tooth fracture risk for strong chewers and recommend supervised use only.",
+        "Clarify material safety and add a warning that small pieces may break off and cause choking or gastrointestinal issues.",
+        "Adjust durability claims to match actual lifespan for aggressive chewers and recommend appropriate chew strength.",
+        "Improve edge finishing and add a safety warning to inspect for sharp edges before each use.",
+        "Enhance bacon scent or clearly state that scent may vary and not all dogs will be attracted.",
+        "Provide accurate size chart and hardness guidance to help customers choose the right product for their dog."
       ],
-      "root_cause": "size_mismatch",
-      "listing_action": "提供精确的尺寸对比图，并明确标注不同口味/尺寸的实际大小，避免“同一尺寸”的误解。"
-    },
-    {
-      "kind": "risk",
-      "theme": "耐用性差，快速损坏",
-      "frequency": 4,
-      "severity_avg": 3,
-      "sample_seqs": [
-        15,
-        23,
-        29
-      ],
-      "root_cause": "quality",
-      "listing_action": "在 listing 中明确标注“不适合强力咀嚼者”，并推荐适合的咀嚼强度等级。"
-    },
-    {
-      "kind": "strength",
-      "theme": "持久耐咬，狗狗喜爱",
-      "frequency": 4,
-      "severity_avg": 0,
-      "sample_seqs": [
-        31,
-        37,
-        38
-      ],
-      "root_cause": "quality",
-      "listing_action": "在 listing 中突出“持久耐咬”和“狗狗喜爱”的卖点，并展示相关用户评价。"
-    },
-    {
-      "kind": "strength",
-      "theme": "挑食狗也爱啃",
-      "frequency": 2,
-      "severity_avg": 0,
-      "sample_seqs": [
-        32,
-        36
-      ],
-      "root_cause": "quality",
-      "listing_action": "在 listing 中强调“适合挑食的狗狗”，并引用用户评价。"
-    },
-    {
-      "kind": "strength",
-      "theme": "易于抓握的形状",
-      "frequency": 1,
-      "severity_avg": 0,
-      "sample_seqs": [
-        35
-      ],
-      "root_cause": "quality",
-      "listing_action": "在 listing 中突出“易于抓握”的设计特点，并配图说明。"
-    },
-    {
-      "kind": "strength",
-      "theme": "狗狗最爱，最佳咀嚼骨",
-      "frequency": 2,
-      "severity_avg": 0,
-      "sample_seqs": [
-        34,
-        40
-      ],
-      "root_cause": "quality",
-      "listing_action": "在 listing 中使用“狗狗最爱”等情感化语言，并展示相关评价。"
+      "verdict": "improve-first"
     }
-  ]
+  },
+  "themes": {
+    "zh": [
+      {
+        "kind": "risk",
+        "theme": "尖锐边缘与口腔伤害",
+        "frequency": 6,
+        "severity_avg": 4.83,
+        "sample_seqs": [
+          1,
+          12,
+          28
+        ],
+        "root_cause": "quality",
+        "listing_action": "在详情页明确标注适用咬合强度与更换周期，并增加边缘打磨工艺说明；若无法保证安全则标注不适用于幼犬及强力啃咬犬。"
+      },
+      {
+        "kind": "risk",
+        "theme": "牙齿断裂与高额兽医费用",
+        "frequency": 5,
+        "severity_avg": 5,
+        "sample_seqs": [
+          3,
+          6,
+          21
+        ],
+        "root_cause": "quality",
+        "listing_action": "在listing中明确硬度等级并警示不适用于已有牙损或强力啃咬犬，建议补充兽医推荐的使用时长限制。"
+      },
+      {
+        "kind": "risk",
+        "theme": "塑料碎屑脱落与误食风险",
+        "frequency": 5,
+        "severity_avg": 4.4,
+        "sample_seqs": [
+          2,
+          18,
+          19
+        ],
+        "root_cause": "quality",
+        "listing_action": "在详情页增加材质安全说明与啃咬后检查提示，明确出现碎屑应立即停用；若材质无法改进则标注not_fixable_by_listing。"
+      },
+      {
+        "kind": "risk",
+        "theme": "狗对气味与口味无兴趣",
+        "frequency": 8,
+        "severity_avg": 2,
+        "sample_seqs": [
+          4,
+          10,
+          11
+        ],
+        "root_cause": "expectation_gap",
+        "listing_action": "在listing中弱化'培根香味'承诺，改为'部分犬只可能不感兴趣'的提示，并建议提供小规格试用装。"
+      },
+      {
+        "kind": "risk",
+        "theme": "尺寸标注不一致",
+        "frequency": 1,
+        "severity_avg": 4,
+        "sample_seqs": [
+          16
+        ],
+        "root_cause": "size_mismatch",
+        "listing_action": "修正尺寸对照表，确保不同口味/规格的实际尺寸与标注一致，并增加实物对比图。"
+      },
+      {
+        "kind": "risk",
+        "theme": "耐用性不足与快速破损",
+        "frequency": 4,
+        "severity_avg": 3.75,
+        "sample_seqs": [
+          15,
+          23,
+          29
+        ],
+        "root_cause": "quality",
+        "listing_action": "在listing中按咬合强度分级推荐，明确强力啃咬犬不适用，并标注预期使用寿命。"
+      },
+      {
+        "kind": "risk",
+        "theme": "产品过大与噪音问题",
+        "frequency": 1,
+        "severity_avg": 2,
+        "sample_seqs": [
+          20
+        ],
+        "root_cause": "size_mismatch",
+        "listing_action": "在listing中提供更精确的尺寸对比图与适用犬种体重范围，并说明在地板上使用的噪音情况。"
+      },
+      {
+        "kind": "strength",
+        "theme": "狗狗喜爱与持久耐咬",
+        "frequency": 6,
+        "severity_avg": 0,
+        "sample_seqs": [
+          31,
+          37,
+          39
+        ],
+        "root_cause": "quality",
+        "listing_action": "在listing中突出'长时间耐咬、狗狗喜爱'的用户反馈，并展示不同犬种的正面评价。"
+      },
+      {
+        "kind": "strength",
+        "theme": "挑食犬也接受",
+        "frequency": 2,
+        "severity_avg": 0,
+        "sample_seqs": [
+          32,
+          36
+        ],
+        "root_cause": "quality",
+        "listing_action": "在listing中强调'适合挑食犬'的卖点，引用挑食犬主人的真实评价。"
+      },
+      {
+        "kind": "strength",
+        "theme": "形状易抓握",
+        "frequency": 1,
+        "severity_avg": 0,
+        "sample_seqs": [
+          35
+        ],
+        "root_cause": "quality",
+        "listing_action": "在listing中突出'易抓握设计'的卖点，配图展示狗狗抓握场景。"
+      },
+      {
+        "kind": "strength",
+        "theme": "长期回购与高性价比",
+        "frequency": 2,
+        "severity_avg": 0,
+        "sample_seqs": [
+          38,
+          40
+        ],
+        "root_cause": "quality",
+        "listing_action": "在listing中展示'多年回购'和'最佳 chew bone'的用户评价，强化品牌信任。"
+      }
+    ],
+    "en": [
+      {
+        "kind": "risk",
+        "theme": "Tooth Damage and Veterinary Injury",
+        "frequency": 6,
+        "severity_avg": 5,
+        "sample_seqs": [
+          3,
+          6,
+          21
+        ],
+        "root_cause": "quality",
+        "listing_action": "Add explicit warnings about tooth fracture risk for strong chewers and recommend supervised use only."
+      },
+      {
+        "kind": "risk",
+        "theme": "Sharp Edges and Oral Injury",
+        "frequency": 4,
+        "severity_avg": 4.75,
+        "sample_seqs": [
+          1,
+          12,
+          28
+        ],
+        "root_cause": "quality",
+        "listing_action": "Improve edge finishing and add a safety warning to inspect for sharp edges before each use."
+      },
+      {
+        "kind": "risk",
+        "theme": "Plastic Ingestion and Illness",
+        "frequency": 5,
+        "severity_avg": 4.6,
+        "sample_seqs": [
+          2,
+          7,
+          18
+        ],
+        "root_cause": "quality",
+        "listing_action": "Clarify material safety and add a warning that small pieces may break off and cause choking or gastrointestinal issues."
+      },
+      {
+        "kind": "risk",
+        "theme": "Durability Failure and Breakage",
+        "frequency": 5,
+        "severity_avg": 3.8,
+        "sample_seqs": [
+          15,
+          23,
+          28
+        ],
+        "root_cause": "quality",
+        "listing_action": "Adjust durability claims to match actual lifespan for aggressive chewers and recommend appropriate chew strength."
+      },
+      {
+        "kind": "risk",
+        "theme": "Dog Disinterest and Scent Mismatch",
+        "frequency": 8,
+        "severity_avg": 2,
+        "sample_seqs": [
+          4,
+          10,
+          11
+        ],
+        "root_cause": "expectation_gap",
+        "listing_action": "Enhance bacon scent or clearly state that scent may vary and not all dogs will be attracted."
+      },
+      {
+        "kind": "risk",
+        "theme": "Size and Hardness Mismatch",
+        "frequency": 2,
+        "severity_avg": 3,
+        "sample_seqs": [
+          16,
+          20
+        ],
+        "root_cause": "size_mismatch",
+        "listing_action": "Provide accurate size chart and hardness guidance to help customers choose the right product for their dog."
+      },
+      {
+        "kind": "strength",
+        "theme": "Long-Lasting Entertainment",
+        "frequency": 4,
+        "severity_avg": 0,
+        "sample_seqs": [
+          31,
+          37,
+          38
+        ],
+        "root_cause": "quality",
+        "listing_action": "Highlight long-lasting durability and ability to keep dogs occupied in the listing."
+      },
+      {
+        "kind": "strength",
+        "theme": "Picky Dogs Approval",
+        "frequency": 3,
+        "severity_avg": 0,
+        "sample_seqs": [
+          32,
+          34,
+          36
+        ],
+        "root_cause": "quality",
+        "listing_action": "Emphasize that the product is appealing even to picky dogs, using customer testimonials."
+      },
+      {
+        "kind": "strength",
+        "theme": "Ergonomic Design and Grip",
+        "frequency": 1,
+        "severity_avg": 0,
+        "sample_seqs": [
+          35
+        ],
+        "root_cause": "quality",
+        "listing_action": "Feature the easier-to-grip design in product images and description."
+      },
+      {
+        "kind": "strength",
+        "theme": "Overall Customer Satisfaction",
+        "frequency": 2,
+        "severity_avg": 0,
+        "sample_seqs": [
+          38,
+          40
+        ],
+        "root_cause": "quality",
+        "listing_action": "Showcase high customer ratings and repeat purchase behavior in the listing."
+      }
+    ]
+  }
 }

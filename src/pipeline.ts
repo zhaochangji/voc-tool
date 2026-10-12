@@ -155,7 +155,7 @@ supports_listing_fix: true/false/null（抱怨能否靠改 Listing 文案缓解�
 ${batch.map(r => `#${r.seq} | ${r.rating}星 | VP:${r.verified} | ${r.title}\n${r.body}`).join('\n---\n')}`;
 }
 
-function stage2Prompt(tags: Tag[], reviewsById: Map<number, Review>): string {
+function stage2Prompt(tags: Tag[], reviewsById: Map<number, Review>, lang: 'zh' | 'en'): string {
     const complaints = tags.filter(t => t.rating_bin === 'complaint');
     const praises = tags.filter(t => t.rating_bin === 'praise');
     const digest = (list: Tag[]) =>
@@ -171,7 +171,7 @@ severity_avg: 平均严重度(0-5，strength 主题填 0)
 sample_seqs: 最多 3 个最典型评论的 seq（必须从下列真实 seq 中取，禁止编造，不要超过 3 个）
 root_cause: quality|size_mismatch|listing_misleading|packaging|logistics|expectation_gap
 listing_action: 一句可执行的修改建议（无法缓解则输出 "not_fixable_by_listing"）
-硬性要求：除非某组打标为空，否则 risk 组和 strength 组各至少 1 个主题。全部主题按 frequency*severity_avg 排序。仅输出 JSON。
+硬性要求：除非某组打标为空，否则 risk 组和 strength 组各至少 1 个主题。全部主题按 frequency*severity_avg 排序。theme 与 listing_action 用${lang === 'zh' ? '中文' : 'English'}书写。仅输出 JSON。
 
 【抱怨打标】
 ${digest(complaints)}
@@ -180,7 +180,7 @@ ${digest(complaints)}
 ${digest(praises)}`;
 }
 
-function stage3Prompt(themes: Theme[], reviewCount: number): string {
+function stage3Prompt(themes: Theme[], reviewCount: number, lang: 'zh' | 'en'): string {
     return `基于以下主题数据（来自 ${reviewCount} 条评论）写报告，目标读者为亚马逊中小卖家。输出 JSON：
 executive_summary: 3 句话——最大风险与机会
 top_strengths: 从 kind="strength" 的主题里取最多 3 条 {theme, frequency}（禁止混入 risk 主题）
@@ -188,7 +188,7 @@ top_risks: 从 kind="risk" 的主题里取最多 3 条 {theme, frequency}（禁�
 buyer_personas: 2-3 个买家画像(一句话/个)
 listing_rewrite_checklist: 按风险排序的可执行清单
 verdict: "buy-to-sell" | "improve-first" | "avoid"
-仅输出 JSON。
+输出语言：除 theme 字段照抄输入外，其余内容全部用${lang === 'zh' ? '中文' : 'English'}书写。仅输出 JSON。
 
 ${JSON.stringify(themes, null, 2)}`;
 }
@@ -233,26 +233,32 @@ async function main() {
     const t0 = Date.now();
 
     const tags = await runStage1(reviews);
-    const themes: Theme[] = DRY_RUN
-        ? stubThemes(tags)
-        : (await callJSON(
-              z.object({ themes: z.array(ThemeSchema).min(1).max(16) }),
-              stage2Prompt(tags, reviewsById),
-              'stage2',
-          )).themes.map(t => ({ ...t, sample_seqs: t.sample_seqs.slice(0, 3) }));
-    const report: Report = DRY_RUN
-        ? stubReport(themes, reviews.length)
-        : await callJSON(ReportSchema, stage3Prompt(themes, reviews.length), 'stage3');
+    // 双语生成：中文给用户看，英文给海外卖家/Reddit 用（多耗 ~$0.003）
+    const themesBy: Record<string, Theme[]> = {};
+    const reportBy: Record<string, Report> = {};
+    for (const lang of ['zh', 'en'] as const) {
+        const themes: Theme[] = DRY_RUN
+            ? stubThemes(tags)
+            : (await callJSON(
+                  z.object({ themes: z.array(ThemeSchema).min(1).max(16) }),
+                  stage2Prompt(tags, reviewsById, lang),
+                  `stage2/${lang}`,
+              )).themes.map(t => ({ ...t, sample_seqs: t.sample_seqs.slice(0, 3) }));
+        themesBy[lang] = themes;
+        reportBy[lang] = DRY_RUN
+            ? stubReport(themes, reviews.length)
+            : await callJSON(ReportSchema, stage3Prompt(themes, reviews.length, lang), `stage3/${lang}`);
+    }
 
     const cost = (totalTokens.input / 1e6) * PRICE.input + (totalTokens.output / 1e6) * PRICE.output;
     const out = {
-        meta: { model: DRY_RUN ? 'dry-run-stub' : MODEL, reviewCount: reviews.length, cost_usd: +cost.toFixed(4), tokens: totalTokens },
-        report,
-        themes,
+        meta: { model: DRY_RUN ? 'dry-run-stub' : MODEL, reviewCount: reviews.length, cost_usd: +cost.toFixed(4), tokens: totalTokens, langs: ['zh', 'en'] },
+        report: reportBy,
+        themes: themesBy,
     };
     writeFileSync('report.json', JSON.stringify(out, null, 2));
-    console.error(`==> 完成 ${((Date.now() - t0) / 1000).toFixed(1)}s，成本约 $${cost.toFixed(4)}，已写入 report.json`);
-    console.log(JSON.stringify(out.report, null, 2));
+    console.error(`==> 完成 ${((Date.now() - t0) / 1000).toFixed(1)}s，成本约 ${cost.toFixed(4)}，已写入 report.json`);
+    console.log(JSON.stringify(out.report.zh, null, 2));
 }
 
 main().catch(e => {

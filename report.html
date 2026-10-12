@@ -2,18 +2,21 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VOC 报告 · B00CPDWT2M</title>
+<title>VOC Report · B00CPDWT2M</title>
 <style>
   :root { --red:#dc2626; --redbg:#fef2f2; --green:#16a34a; --greenbg:#f0fdf4; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, "PingFang SC", "Segoe UI", sans-serif; color: var(--ink); background: #f9fafb; line-height: 1.65; }
   .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
-  header.hero { background: linear-gradient(135deg,#111827,#1f2937); color: #fff; border-radius: 16px; padding: 28px 30px; margin-bottom: 20px; }
-  .hero h1 { font-size: 21px; font-weight: 700; margin-bottom: 6px; }
+  header.hero { background: linear-gradient(135deg,#111827,#1f2937); color: #fff; border-radius: 16px; padding: 28px 30px; margin-bottom: 20px; position: relative; }
+  .hero h1 { font-size: 21px; font-weight: 700; margin-bottom: 6px; padding-right: 110px; }
   .hero .sub { color: #d1d5db; font-size: 13px; }
   .hero .verdict { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 15px; }
   .verdict.ok { background: #16a34a; } .verdict.warn { background: #f59e0b; } .verdict.bad { background: #dc2626; }
   .verdict-note { color: #9ca3af; font-size: 12px; margin-left: 8px; }
+  .lang-toggle { position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,.12); border-radius: 999px; padding: 3px; display: flex; gap: 3px; }
+  .lang-btn { border: 0; background: transparent; color: #d1d5db; font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 999px; cursor: pointer; }
+  .lang-btn.active { background: #fff; color: #111827; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
   @media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
   .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
@@ -51,22 +54,27 @@
 </head>
 <body>
 <div class="wrap">
+  <div id="page-zh" class="lang-page">
   <header class="hero">
-    <h1>Amazon 产品 </h1>
-    <div class="sub">ASIN B00CPDWT2M · 40 条评论 · 分析 40 条（差评 30 / 好评 10）· 2026/10/12 11:20:17</div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中</button>
+      <button class="lang-btn " data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <h1>Amazon Product </h1>
+    <div class="sub">ASIN B00CPDWT2M · 40 条评论 · 分析 40 条（差评 30 / 好评 10） · 2026/10/12 11:35:22</div>
     <div><span class="verdict warn">⚠️ 先改后卖</span><span class="verdict-note">存在可改进的结构性缺陷，入场前先解决</span></div>
   </header>
 
-  <div class="summary">最大风险是牙齿损伤、锋利边缘和塑料碎片误食等安全问题，可能导致高额兽医费用和差评，严重损害品牌信誉。最大机会在于产品被部分狗狗喜爱且耐咬，可针对合适犬种和咀嚼强度进行精准营销。建议先改进质量与警示，再考虑销售。</div>
+  <div class="summary">最大风险是尖锐边缘与口腔伤害（6次，严重度4.83）及牙齿断裂与高额兽医费用（5次，严重度5），可能引发高额赔偿和差评。最大机会是狗狗喜爱与持久耐咬（6次）以及长期回购与高性价比（2次），可强化正面口碑。建议优先改进产品安全并调整listing预期，再放大优势卖点。</div>
 
   <div class="grid2">
     <div class="card">
       <div class="sec-title" style="margin:0 0 10px"><span class="dot" style="background:var(--red)"></span>主要风险</div>
-      <div class="pill-list"><span class="pill risk">牙齿损伤与高额兽医费用<span class="n">×5</span></span><span class="pill risk">塑料碎片误食引发健康问题<span class="n">×5</span></span><span class="pill risk">锋利边缘导致口腔受伤<span class="n">×4</span></span></div>
+      <div class="pill-list"><span class="pill risk">尖锐边缘与口腔伤害<span class="n">×6</span></span><span class="pill risk">牙齿断裂与高额兽医费用<span class="n">×5</span></span><span class="pill risk">塑料碎屑脱落与误食风险<span class="n">×5</span></span></div>
     </div>
     <div class="card">
       <div class="sec-title" style="margin:0 0 10px"><span class="dot" style="background:var(--green)"></span>主要优点</div>
-      <div class="pill-list"><span class="pill strength">持久耐咬，狗狗喜爱<span class="n">×4</span></span><span class="pill strength">挑食狗也爱啃<span class="n">×2</span></span><span class="pill strength">狗狗最爱，最佳咀嚼骨<span class="n">×2</span></span></div>
+      <div class="pill-list"><span class="pill strength">狗狗喜爱与持久耐咬<span class="n">×6</span></span><span class="pill strength">挑食犬也接受<span class="n">×2</span></span><span class="pill strength">长期回购与高性价比<span class="n">×2</span></span></div>
     </div>
   </div>
 
@@ -75,243 +83,530 @@
     <div class="card theme risk">
       <div class="theme-head">
         <span class="badge risk">⚠️ 风险</span>
-        <h3>牙齿损伤与高额兽医费用</h3>
-        <span class="freq">出现 5 次</span>
-        <span class="sev">严重度 5.0/5</span>
-      </div>
-      <div class="meta-row">
-        <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在包装和详情页明确标注“不适用于有牙齿问题或强力咀嚼的犬只”，并建议咨询兽医。</span>
-      </div>
-      <details open><summary>引用的原评论 (3)</summary>
-      <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">They lie</span> <span class="qmeta">未验证 · October 7, 2026</span></div>
-        <div class="qbody">What this product claims &quot;for dog with strong teeth&quot; is patently unfalsifiable. So if it destroyes your dogs molars, it is your fault for not knowing whether it&#39;s teeth is strong enough. That is just component bs. It progressively destroyed my dogs molars over a year and half. We didn&#39;t know. Dogs molars are not designed to chew through nylon. Stronger dogs are at more risk than smaller dogs. It w…</div>
-      </blockquote>
-      <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Be careful with these bones</span> <span class="qmeta">✓ 已验证购买 · October 1, 2026</span></div>
-        <div class="qbody">Be very careful with these, I bought them for my frenchie and long hair chihuahua and the bones cracked their molars. Cost me over $2000 in vet bills. I thought they were great at first because dogs loved nawing on them for hours, so I bought total 4 of them, two for the house and two for the RV.</div>
-      </blockquote>
-      <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Not good for dogs!!</span> <span class="qmeta">✓ 已验证购买 · September 2, 2026</span></div>
-        <div class="qbody">Don’t buy these for your dog! Damaged and broke both of my dog’s teeth. They both had to have teeth removed due to chewing on these bones!!</div>
-      </blockquote></details>
-    </div>
-    <div class="card theme risk">
-      <div class="theme-head">
-        <span class="badge risk">⚠️ 风险</span>
-        <h3>锋利边缘导致口腔受伤</h3>
-        <span class="freq">出现 4 次</span>
+        <h3>尖锐边缘与口腔伤害</h3>
+        <span class="freq">出现 6 次</span>
         <span class="sev">严重度 4.8/5</span>
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：改进生产工艺去除毛边，并在 listing 中增加“使用前检查，若出现锋利边缘请停止使用”的警示。</span>
+        <span class="tag action">建议：在详情页明确标注适用咬合强度与更换周期，并增加边缘打磨工艺说明；若无法保证安全则标注不适用于幼犬及强力啃咬犬。</span>
       </div>
       <details open><summary>引用的原评论 (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">This is a scar hazard! I DO NOT recommend it!</span> <span class="qmeta">✓ 已验证购买 · October 8, 2026</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">This is a scar hazard! I DO NOT recommend it!</span> <span class="qmeta">✓ 已验证购买 · October 8, 2026</span></div>
         <div class="qbody">it has a sharp round edge, which could easily scar the tongue of my puppy. This is a horrible design, my wife already injured her hands while washing it. Not acceptable quality at all, this is a tremendous hazard.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Dangerous chew toy</span> <span class="qmeta">未验证 · September 22, 2026 · 1 人觉得有用</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Dangerous chew toy</span> <span class="qmeta">未验证 · September 22, 2026 · 1 人觉得有用</span></div>
         <div class="qbody">No star. Dangerous chew toy. After 15 minutes chewing sharp razorblade sharp edges on toy. Dog had bleading gums.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star2">★★☆☆☆</span> <span class="qtitle">Not what we were hoping</span> <span class="qmeta">✓ 已验证购买 · August 17, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Not what we were hoping</span> <span class="qmeta">✓ 已验证购买 · August 17, 2026</span></div>
         <div class="qbody">This is my dog‘s newest favorite bone. I had such high hopes but after 2 1/2 days this is what the bone look like and I had to take it away. Deadly sharp edges, and pieces breaking off. So bummed. she is not a Rottweiler type of aggressive tour. She’s a seven month old golden retriever.</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
       <div class="theme-head">
         <span class="badge risk">⚠️ 风险</span>
-        <h3>塑料碎片误食引发健康问题</h3>
+        <h3>牙齿断裂与高额兽医费用</h3>
         <span class="freq">出现 5 次</span>
-        <span class="sev">严重度 4.6/5</span>
+        <span class="sev">严重度 5.0/5</span>
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在 listing 中强调“本产品非可食用，若被咬碎请立即丢弃”，并建议在监督下使用。</span>
+        <span class="tag action">建议：在listing中明确硬度等级并警示不适用于已有牙损或强力啃咬犬，建议补充兽医推荐的使用时长限制。</span>
       </div>
       <details open><summary>引用的原评论 (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">DO NOT BUY!!! This made my puppy SO sick</span> <span class="qmeta">未验证 · October 8, 2026</span></div>
-        <div class="qbody">Do NOT buy this for your dog. The plastic from this product made my puppy SO sick. Plastic is so harmful for your dog to ingest!!!! Get a natural bone that doesn’t include plastic.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">They lie</span> <span class="qmeta">未验证 · October 7, 2026</span></div>
+        <div class="qbody">What this product claims &quot;for dog with strong teeth&quot; is patently unfalsifiable. So if it destroyes your dogs molars, it is your fault for not knowing whether it&#39;s teeth is strong enough. That is just component bs. It progressively destroyed my dogs molars over a year and half. We didn&#39;t know. Dogs molars are not designed to chew through nylon. Stronger dogs are at more risk than smaller dogs. It w…</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">BUYER BEWARE! Causes diarrhea!</span> <span class="qmeta">✓ 已验证购买 · September 30, 2026</span></div>
-        <div class="qbody">BEWARE! This gave my dog terrible diarrhea. It’s plastic and our dogs shouldn’t be eating plastic. Took me a while to realize it was this toy causing it. Once removed the diarrhea went away a couple days later. If you love your dog, don’t buy him toys like this. Learn from my mistake.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Be careful with these bones</span> <span class="qmeta">✓ 已验证购买 · October 1, 2026</span></div>
+        <div class="qbody">Be very careful with these, I bought them for my frenchie and long hair chihuahua and the bones cracked their molars. Cost me over $2000 in vet bills. I thought they were great at first because dogs loved nawing on them for hours, so I bought total 4 of them, two for the house and two for the RV.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">May work for some dogs but not all of the</span> <span class="qmeta">✓ 已验证购买 · September 24, 2026 · 1 人觉得有用</span></div>
-        <div class="qbody">They can be chewed up by the dogs and small bits of what they shave off can be digested and cause the dog some issues. They may work for you dogs but not ours.</div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not good for dogs!!</span> <span class="qmeta">✓ 已验证购买 · September 2, 2026</span></div>
+        <div class="qbody">Don’t buy these for your dog! Damaged and broke both of my dog’s teeth. They both had to have teeth removed due to chewing on these bones!!</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
       <div class="theme-head">
         <span class="badge risk">⚠️ 风险</span>
-        <h3>狗对产品无兴趣</h3>
-        <span class="freq">出现 8 次</span>
-        <span class="sev">严重度 1.8/5</span>
+        <h3>塑料碎屑脱落与误食风险</h3>
+        <span class="freq">出现 5 次</span>
+        <span class="sev">严重度 4.4/5</span>
       </div>
       <div class="meta-row">
-        <span class="tag">归因：期望落差</span>
-        <span class="tag action">建议：在 listing 中增加“并非所有狗都喜欢，建议先购买小尺寸试口”的说明，并强调培根风味可能因批次而异。</span>
+        <span class="tag">归因：质量问题</span>
+        <span class="tag action">建议：在详情页增加材质安全说明与啃咬后检查提示，明确出现碎屑应立即停用；若材质无法改进则标注not_fixable_by_listing。</span>
       </div>
       <details open><summary>引用的原评论 (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">No good</span> <span class="qmeta">✓ 已验证购买 · October 6, 2026</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">DO NOT BUY!!! This made my puppy SO sick</span> <span class="qmeta">未验证 · October 8, 2026</span></div>
+        <div class="qbody">Do NOT buy this for your dog. The plastic from this product made my puppy SO sick. Plastic is so harmful for your dog to ingest!!!! Get a natural bone that doesn’t include plastic.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Choking hazard</span> <span class="qmeta">✓ 已验证购买 · September 4, 2026 · 1 人觉得有用</span></div>
+        <div class="qbody">Beware, unsure if the material has changed or we have outgrown, but won&#39;t be purchasing again. Within days of buying a new set (the last one had been loved for a while and was getting close to their recommended recycled look), dog started making choking sounds and I found pieces of the plastic in front of where she was chewing on it and in mouth. We have been enjoying these since puppy days, never…</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not very good for hard core aggressive  chewers.</span> <span class="qmeta">✓ 已验证购买 · September 3, 2026</span></div>
+        <div class="qbody">Had to throw this in the trash. My aggressive chewer was chewing off little pieces and not sure how much she swallowed</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ 风险</span>
+        <h3>狗对气味与口味无兴趣</h3>
+        <span class="freq">出现 8 次</span>
+        <span class="sev">严重度 2.0/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">归因：期望落差</span>
+        <span class="tag action">建议：在listing中弱化&#39;培根香味&#39;承诺，改为&#39;部分犬只可能不感兴趣&#39;的提示，并建议提供小规格试用装。</span>
+      </div>
+      <details open><summary>引用的原评论 (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">No good</span> <span class="qmeta">✓ 已验证购买 · October 6, 2026</span></div>
         <div class="qbody">My dog had zero interest . It must not smell like bacon as advertised . Returned it</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Didn’t work for my dogs</span> <span class="qmeta">✓ 已验证购买 · September 22, 2026</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Didn’t work for my dogs</span> <span class="qmeta">✓ 已验证购买 · September 22, 2026</span></div>
         <div class="qbody">I have a boxer and a Catahoula . My dogs just smelled it and walked away, they refused to touch it.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Neither dog will touch it!</span> <span class="qmeta">✓ 已验证购买 · September 22, 2026</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Neither dog will touch it!</span> <span class="qmeta">✓ 已验证购买 · September 22, 2026</span></div>
         <div class="qbody">I have two dogs, both are different mixed breeds and neither one will even touch this! Total waste of money!</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
       <div class="theme-head">
         <span class="badge risk">⚠️ 风险</span>
-        <h3>尺寸不符与误导</h3>
-        <span class="freq">出现 2 次</span>
-        <span class="sev">严重度 3.0/5</span>
+        <h3>尺寸标注不一致</h3>
+        <span class="freq">出现 1 次</span>
+        <span class="sev">严重度 4.0/5</span>
       </div>
       <div class="meta-row">
         <span class="tag">归因：尺寸不符</span>
-        <span class="tag action">建议：提供精确的尺寸对比图，并明确标注不同口味/尺寸的实际大小，避免“同一尺寸”的误解。</span>
+        <span class="tag action">建议：修正尺寸对照表，确保不同口味/规格的实际尺寸与标注一致，并增加实物对比图。</span>
       </div>
-      <details open><summary>引用的原评论 (2)</summary>
+      <details open><summary>引用的原评论 (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star2">★★☆☆☆</span> <span class="qtitle">Isn&#39;t better for dogs then the rubber chew toys</span> <span class="qmeta">✓ 已验证购买 · September 14, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Isn&#39;t better for dogs then the rubber chew toys</span> <span class="qmeta">✓ 已验证购买 · September 14, 2026</span></div>
         <div class="qbody">I ordered both peanut in medium and chicken in small and they were the same size. After 2 days of my 10lbs puppy dachshund chewing, she started throwing up the shards so unfortunately this went to the garbage.</div>
-      </blockquote>
-      <blockquote class="quote">
-        <div class="quote-head"><span class="stars star2">★★☆☆☆</span> <span class="qtitle">HUGE!</span> <span class="qmeta">✓ 已验证购买 · September 2, 2026</span></div>
-        <div class="qbody">This wishbone is HUGE. I wasn’t expecting it to be that huge. My dog still likes it but it’s really noisy on my wood floors. Disrupting.</div>
       </blockquote></details>
     </div>
     <div class="card theme risk">
       <div class="theme-head">
         <span class="badge risk">⚠️ 风险</span>
-        <h3>耐用性差，快速损坏</h3>
+        <h3>耐用性不足与快速破损</h3>
         <span class="freq">出现 4 次</span>
-        <span class="sev">严重度 3.0/5</span>
+        <span class="sev">严重度 3.8/5</span>
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在 listing 中明确标注“不适合强力咀嚼者”，并推荐适合的咀嚼强度等级。</span>
+        <span class="tag action">建议：在listing中按咬合强度分级推荐，明确强力啃咬犬不适用，并标注预期使用寿命。</span>
       </div>
       <details open><summary>引用的原评论 (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star2">★★☆☆☆</span> <span class="qtitle">Nice while it lasted</span> <span class="qmeta">✓ 已验证购买 · September 15, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Nice while it lasted</span> <span class="qmeta">✓ 已验证购买 · September 15, 2026</span></div>
         <div class="qbody">Dog loved bone but started chewing it apart. So it had to go.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Not worth it…</span> <span class="qmeta">✓ 已验证购买 · August 30, 2026</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not worth it…</span> <span class="qmeta">✓ 已验证购买 · August 30, 2026</span></div>
         <div class="qbody">This is not worth it at all for aggressive chewing dogs my tiny corgi (small breed) did this in 2 days and that’s not with her having it more than a couple hrs at a time</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star1">★☆☆☆☆</span> <span class="qtitle">Not worth it for hard chewers</span> <span class="qmeta">✓ 已验证购买 · August 16, 2026</span></div>
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not worth it for hard chewers</span> <span class="qmeta">✓ 已验证购买 · August 16, 2026</span></div>
         <div class="qbody">I honestly wouldn’t recommend this for hard-chewing puppies. My puppy is only 6 months old and chewed through it pretty quickly. I expected it to last much longer, especially since it’s advertised for aggressive chewers. It may be fine for dogs who aren’t heavy chewers, but for a puppy who really likes to chew, I don’t think it’s worth the price. I would definitely do your research before buying t…</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ 风险</span>
+        <h3>产品过大与噪音问题</h3>
+        <span class="freq">出现 1 次</span>
+        <span class="sev">严重度 2.0/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">归因：尺寸不符</span>
+        <span class="tag action">建议：在listing中提供更精确的尺寸对比图与适用犬种体重范围，并说明在地板上使用的噪音情况。</span>
+      </div>
+      <details open><summary>引用的原评论 (1)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">HUGE!</span> <span class="qmeta">✓ 已验证购买 · September 2, 2026</span></div>
+        <div class="qbody">This wishbone is HUGE. I wasn’t expecting it to be that huge. My dog still likes it but it’s really noisy on my wood floors. Disrupting.</div>
       </blockquote></details>
     </div>
     <div class="card theme strength">
       <div class="theme-head">
         <span class="badge strength">👍 优点</span>
-        <h3>持久耐咬，狗狗喜爱</h3>
-        <span class="freq">出现 4 次</span>
+        <h3>狗狗喜爱与持久耐咬</h3>
+        <span class="freq">出现 6 次</span>
         
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在 listing 中突出“持久耐咬”和“狗狗喜爱”的卖点，并展示相关用户评价。</span>
+        <span class="tag action">建议：在listing中突出&#39;长时间耐咬、狗狗喜爱&#39;的用户反馈，并展示不同犬种的正面评价。</span>
       </div>
       <details open><summary>引用的原评论 (3)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">Favorite chew toy</span> <span class="qmeta">✓ 已验证购买 · October 9, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Favorite chew toy</span> <span class="qmeta">✓ 已验证购买 · October 9, 2026</span></div>
         <div class="qbody">Both of our dogs love these. Golden doodle and Jack Russell. Last a very long time. Not messy.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">Perfect for daily chewers!</span> <span class="qmeta">✓ 已验证购买 · October 4, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Perfect for daily chewers!</span> <span class="qmeta">✓ 已验证购买 · October 4, 2026</span></div>
         <div class="qbody">Our dog absolutely loves these! It has quickly become a favorite, and she chews on it daily. It keeps her completely happy and occupied.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">Favorite chew bones for my shepskys</span> <span class="qmeta">✓ 已验证购买 · October 4, 2026</span></div>
-        <div class="qbody">I have ordered these for years... They are always my dog&#39;s favorite go to chew bones. They are a really great large size. The shape makes it really easy for the dogs to get a good grip. They are hard enough to last quite a while, but soft enough to not damage teeth. I feel that for the account if time our dogs enjoy this bone it&#39;s a great value for the money. We can line up all the bones in the ho…</div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Tastes a long long time</span> <span class="qmeta">✓ 已验证购买 · October 3, 2026</span></div>
+        <div class="qbody">Dog lab/pit love them long lasting</div>
       </blockquote></details>
     </div>
     <div class="card theme strength">
       <div class="theme-head">
         <span class="badge strength">👍 优点</span>
-        <h3>挑食狗也爱啃</h3>
+        <h3>挑食犬也接受</h3>
         <span class="freq">出现 2 次</span>
         
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在 listing 中强调“适合挑食的狗狗”，并引用用户评价。</span>
+        <span class="tag action">建议：在listing中强调&#39;适合挑食犬&#39;的卖点，引用挑食犬主人的真实评价。</span>
       </div>
       <details open><summary>引用的原评论 (2)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">Picky Beagle approves</span> <span class="qmeta">✓ 已验证购买 · October 8, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Picky Beagle approves</span> <span class="qmeta">✓ 已验证购买 · October 8, 2026</span></div>
         <div class="qbody">My beagle is extremely picky about bones and I&#39;ve wasted a lot of money on bones he never chewed on. Gave him this bone and he&#39;s been chewing on it for 30 minutes straight. Well worth the money.</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">♥️ Pibble tested and Pibble approved!</span> <span class="qmeta">✓ 已验证购买 · October 4, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">♥️ Pibble tested and Pibble approved!</span> <span class="qmeta">✓ 已验证购买 · October 4, 2026</span></div>
         <div class="qbody">Pibble tested and approved! Thank you Benebone again! This is my velvet hippo’s new favorite flavor of chew! I do wanna point out there’s not a lot of things my little four legged best friend can have because he has IBD! And this is gastrointestinal issue approved! 😃</div>
       </blockquote></details>
     </div>
     <div class="card theme strength">
       <div class="theme-head">
         <span class="badge strength">👍 优点</span>
-        <h3>易于抓握的形状</h3>
+        <h3>形状易抓握</h3>
         <span class="freq">出现 1 次</span>
         
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在 listing 中突出“易于抓握”的设计特点，并配图说明。</span>
+        <span class="tag action">建议：在listing中突出&#39;易抓握设计&#39;的卖点，配图展示狗狗抓握场景。</span>
       </div>
       <details open><summary>引用的原评论 (1)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">Canine loves it</span> <span class="qmeta">✓ 已验证购买 · October 5, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Canine loves it</span> <span class="qmeta">✓ 已验证购买 · October 5, 2026</span></div>
         <div class="qbody">My dog loves it! It’s easier to grab onto than regular bone shape.</div>
       </blockquote></details>
     </div>
     <div class="card theme strength">
       <div class="theme-head">
         <span class="badge strength">👍 优点</span>
-        <h3>狗狗最爱，最佳咀嚼骨</h3>
+        <h3>长期回购与高性价比</h3>
         <span class="freq">出现 2 次</span>
         
       </div>
       <div class="meta-row">
         <span class="tag">归因：质量问题</span>
-        <span class="tag action">建议：在 listing 中使用“狗狗最爱”等情感化语言，并展示相关评价。</span>
+        <span class="tag action">建议：在listing中展示&#39;多年回购&#39;和&#39;最佳 chew bone&#39;的用户评价，强化品牌信任。</span>
       </div>
       <details open><summary>引用的原评论 (2)</summary>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">Puppy loves it!</span> <span class="qmeta">✓ 已验证购买 · October 7, 2026</span></div>
-        <div class="qbody">My puppy loves it!!</div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Favorite chew bones for my shepskys</span> <span class="qmeta">✓ 已验证购买 · October 4, 2026</span></div>
+        <div class="qbody">I have ordered these for years... They are always my dog&#39;s favorite go to chew bones. They are a really great large size. The shape makes it really easy for the dogs to get a good grip. They are hard enough to last quite a while, but soft enough to not damage teeth. I feel that for the account if time our dogs enjoy this bone it&#39;s a great value for the money. We can line up all the bones in the ho…</div>
       </blockquote>
       <blockquote class="quote">
-        <div class="quote-head"><span class="stars star5">★★★★★</span> <span class="qtitle">The best!</span> <span class="qmeta">✓ 已验证购买 · October 2, 2026</span></div>
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">The best!</span> <span class="qmeta">✓ 已验证购买 · October 2, 2026</span></div>
         <div class="qbody">Best chew bone ever!</div>
       </blockquote></details>
     </div>
 
   <div class="sec-title"><span class="dot" style="background:#0891b2"></span>买家画像</div>
-  <div class="personas"><span class="persona">👤 养有强力咀嚼犬只的宠物主人，担心产品安全性和耐用性。</span><span class="persona">👤 养有挑食狗狗的宠物主人，寻找狗狗喜欢的咀嚼玩具。</span><span class="persona">👤 注重性价比的中小卖家，希望找到质量可靠且差评少的产品。</span></div>
+  <div class="personas"><span class="persona">👤 养有幼犬或强力啃咬犬的主人，担心玩具伤害狗狗口腔和牙齿，愿意为安全支付溢价。</span><span class="persona">👤 养有挑食犬的主人，希望找到狗狗感兴趣且能长时间啃咬的玩具，重视性价比和回购价值。</span><span class="persona">👤 注重产品耐用性和尺寸匹配的买家，会仔细查看尺寸表和材质说明，避免误食和噪音问题。</span></div>
 
   <div class="sec-title"><span class="dot" style="background:#4f46e5"></span>Listing 改写清单（按优先级）</div>
-  <ol class="checklist"><li>在包装和详情页明确标注“不适用于有牙齿问题或强力咀嚼的犬只”，并建议咨询兽医。</li><li>在 listing 中强调“本产品非可食用，若被咬碎请立即丢弃”，并建议在监督下使用。</li><li>改进生产工艺去除毛边，并在 listing 中增加“使用前检查，若出现锋利边缘请停止使用”的警示。</li><li>在 listing 中明确标注“不适合强力咀嚼者”，并推荐适合的咀嚼强度等级。</li><li>在 listing 中增加“并非所有狗都喜欢，建议先购买小尺寸试口”的说明，并强调培根风味可能因批次而异。</li><li>提供精确的尺寸对比图，并明确标注不同口味/尺寸的实际大小，避免“同一尺寸”的误解。</li></ol>
+  <ol class="checklist"><li>在详情页明确标注适用咬合强度与更换周期，并增加边缘打磨工艺说明；若无法保证安全则标注不适用于幼犬及强力啃咬犬。</li><li>在listing中明确硬度等级并警示不适用于已有牙损或强力啃咬犬，建议补充兽医推荐的使用时长限制。</li><li>在详情页增加材质安全说明与啃咬后检查提示，明确出现碎屑应立即停用；若材质无法改进则标注not_fixable_by_listing。</li><li>在listing中弱化&#39;培根香味&#39;承诺，改为&#39;部分犬只可能不感兴趣&#39;的提示，并建议提供小规格试用装。</li><li>在listing中按咬合强度分级推荐，明确强力啃咬犬不适用，并标注预期使用寿命。</li><li>修正尺寸对照表，确保不同口味/规格的实际尺寸与标注一致，并增加实物对比图。</li><li>在listing中提供更精确的尺寸对比图与适用犬种体重范围，并说明在地板上使用的噪音情况。</li></ol>
 
-  <footer>
-    引用可信度：25/25 条引用指向真实评论 · 生成于 voc-tool
-  </footer>
+  <footer>引用可信度：25/25 条引用指向真实评论 · 生成于 voc-tool</footer></div>
+  <div id="page-en" class="lang-page" style="display:none">
+  <header class="hero">
+    <div class="lang-toggle">
+      <button class="lang-btn " data-lang="zh" onclick="setLang('zh')">中</button>
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <h1>Amazon Product </h1>
+    <div class="sub">ASIN B00CPDWT2M · 40 ratings · analyzed 40 reviews (30 critical / 10 positive) · 2026/10/12 11:35:22</div>
+    <div><span class="verdict warn">⚠️ Improve First</span><span class="verdict-note">Fixable structural flaws, address before selling</span></div>
+  </header>
+
+  <div class="summary">The biggest risk is tooth damage and veterinary injury from strong chewers, which can lead to costly returns and negative reviews. The biggest opportunity is leveraging long-lasting entertainment and picky dog approval to attract repeat buyers. Overall, the product has strong appeal but requires safety warnings and durability adjustments to reduce risk.</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="sec-title" style="margin:0 0 10px"><span class="dot" style="background:var(--red)"></span>Top Risks</div>
+      <div class="pill-list"><span class="pill risk">Tooth Damage and Veterinary Injury<span class="n">×6</span></span><span class="pill risk">Plastic Ingestion and Illness<span class="n">×5</span></span><span class="pill risk">Durability Failure and Breakage<span class="n">×5</span></span></div>
+    </div>
+    <div class="card">
+      <div class="sec-title" style="margin:0 0 10px"><span class="dot" style="background:var(--green)"></span>Top Strengths</div>
+      <div class="pill-list"><span class="pill strength">Long-Lasting Entertainment<span class="n">×4</span></span><span class="pill strength">Picky Dogs Approval<span class="n">×3</span></span><span class="pill strength">Overall Customer Satisfaction<span class="n">×2</span></span></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:#4f46e5"></span>Theme Details (every claim cites real reviews)</div>
+  
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ Risk</span>
+        <h3>Tooth Damage and Veterinary Injury</h3>
+        <span class="freq">6 mentions</span>
+        <span class="sev">Severity 5.0/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Add explicit warnings about tooth fracture risk for strong chewers and recommend supervised use only.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">They lie</span> <span class="qmeta">Unverified · October 7, 2026</span></div>
+        <div class="qbody">What this product claims &quot;for dog with strong teeth&quot; is patently unfalsifiable. So if it destroyes your dogs molars, it is your fault for not knowing whether it&#39;s teeth is strong enough. That is just component bs. It progressively destroyed my dogs molars over a year and half. We didn&#39;t know. Dogs molars are not designed to chew through nylon. Stronger dogs are at more risk than smaller dogs. It w…</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Be careful with these bones</span> <span class="qmeta">✓ Verified Purchase · October 1, 2026</span></div>
+        <div class="qbody">Be very careful with these, I bought them for my frenchie and long hair chihuahua and the bones cracked their molars. Cost me over $2000 in vet bills. I thought they were great at first because dogs loved nawing on them for hours, so I bought total 4 of them, two for the house and two for the RV.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not good for dogs!!</span> <span class="qmeta">✓ Verified Purchase · September 2, 2026</span></div>
+        <div class="qbody">Don’t buy these for your dog! Damaged and broke both of my dog’s teeth. They both had to have teeth removed due to chewing on these bones!!</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ Risk</span>
+        <h3>Sharp Edges and Oral Injury</h3>
+        <span class="freq">4 mentions</span>
+        <span class="sev">Severity 4.8/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Improve edge finishing and add a safety warning to inspect for sharp edges before each use.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">This is a scar hazard! I DO NOT recommend it!</span> <span class="qmeta">✓ Verified Purchase · October 8, 2026</span></div>
+        <div class="qbody">it has a sharp round edge, which could easily scar the tongue of my puppy. This is a horrible design, my wife already injured her hands while washing it. Not acceptable quality at all, this is a tremendous hazard.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Dangerous chew toy</span> <span class="qmeta">Unverified · September 22, 2026 · 1 found helpful</span></div>
+        <div class="qbody">No star. Dangerous chew toy. After 15 minutes chewing sharp razorblade sharp edges on toy. Dog had bleading gums.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Not what we were hoping</span> <span class="qmeta">✓ Verified Purchase · August 17, 2026</span></div>
+        <div class="qbody">This is my dog‘s newest favorite bone. I had such high hopes but after 2 1/2 days this is what the bone look like and I had to take it away. Deadly sharp edges, and pieces breaking off. So bummed. she is not a Rottweiler type of aggressive tour. She’s a seven month old golden retriever.</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ Risk</span>
+        <h3>Plastic Ingestion and Illness</h3>
+        <span class="freq">5 mentions</span>
+        <span class="sev">Severity 4.6/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Clarify material safety and add a warning that small pieces may break off and cause choking or gastrointestinal issues.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">DO NOT BUY!!! This made my puppy SO sick</span> <span class="qmeta">Unverified · October 8, 2026</span></div>
+        <div class="qbody">Do NOT buy this for your dog. The plastic from this product made my puppy SO sick. Plastic is so harmful for your dog to ingest!!!! Get a natural bone that doesn’t include plastic.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">BUYER BEWARE! Causes diarrhea!</span> <span class="qmeta">✓ Verified Purchase · September 30, 2026</span></div>
+        <div class="qbody">BEWARE! This gave my dog terrible diarrhea. It’s plastic and our dogs shouldn’t be eating plastic. Took me a while to realize it was this toy causing it. Once removed the diarrhea went away a couple days later. If you love your dog, don’t buy him toys like this. Learn from my mistake.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Choking hazard</span> <span class="qmeta">✓ Verified Purchase · September 4, 2026 · 1 found helpful</span></div>
+        <div class="qbody">Beware, unsure if the material has changed or we have outgrown, but won&#39;t be purchasing again. Within days of buying a new set (the last one had been loved for a while and was getting close to their recommended recycled look), dog started making choking sounds and I found pieces of the plastic in front of where she was chewing on it and in mouth. We have been enjoying these since puppy days, never…</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ Risk</span>
+        <h3>Durability Failure and Breakage</h3>
+        <span class="freq">5 mentions</span>
+        <span class="sev">Severity 3.8/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Adjust durability claims to match actual lifespan for aggressive chewers and recommend appropriate chew strength.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Nice while it lasted</span> <span class="qmeta">✓ Verified Purchase · September 15, 2026</span></div>
+        <div class="qbody">Dog loved bone but started chewing it apart. So it had to go.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Not worth it…</span> <span class="qmeta">✓ Verified Purchase · August 30, 2026</span></div>
+        <div class="qbody">This is not worth it at all for aggressive chewing dogs my tiny corgi (small breed) did this in 2 days and that’s not with her having it more than a couple hrs at a time</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Not what we were hoping</span> <span class="qmeta">✓ Verified Purchase · August 17, 2026</span></div>
+        <div class="qbody">This is my dog‘s newest favorite bone. I had such high hopes but after 2 1/2 days this is what the bone look like and I had to take it away. Deadly sharp edges, and pieces breaking off. So bummed. she is not a Rottweiler type of aggressive tour. She’s a seven month old golden retriever.</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ Risk</span>
+        <h3>Dog Disinterest and Scent Mismatch</h3>
+        <span class="freq">8 mentions</span>
+        <span class="sev">Severity 2.0/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Expectation gap</span>
+        <span class="tag action">Action: Enhance bacon scent or clearly state that scent may vary and not all dogs will be attracted.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">No good</span> <span class="qmeta">✓ Verified Purchase · October 6, 2026</span></div>
+        <div class="qbody">My dog had zero interest . It must not smell like bacon as advertised . Returned it</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Didn’t work for my dogs</span> <span class="qmeta">✓ Verified Purchase · September 22, 2026</span></div>
+        <div class="qbody">I have a boxer and a Catahoula . My dogs just smelled it and walked away, they refused to touch it.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★☆☆☆☆</span> <span class="qtitle">Neither dog will touch it!</span> <span class="qmeta">✓ Verified Purchase · September 22, 2026</span></div>
+        <div class="qbody">I have two dogs, both are different mixed breeds and neither one will even touch this! Total waste of money!</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme risk">
+      <div class="theme-head">
+        <span class="badge risk">⚠️ Risk</span>
+        <h3>Size and Hardness Mismatch</h3>
+        <span class="freq">2 mentions</span>
+        <span class="sev">Severity 3.0/5</span>
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Size mismatch</span>
+        <span class="tag action">Action: Provide accurate size chart and hardness guidance to help customers choose the right product for their dog.</span>
+      </div>
+      <details open><summary>Cited reviews (2)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">Isn&#39;t better for dogs then the rubber chew toys</span> <span class="qmeta">✓ Verified Purchase · September 14, 2026</span></div>
+        <div class="qbody">I ordered both peanut in medium and chicken in small and they were the same size. After 2 days of my 10lbs puppy dachshund chewing, she started throwing up the shards so unfortunately this went to the garbage.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★☆☆☆</span> <span class="qtitle">HUGE!</span> <span class="qmeta">✓ Verified Purchase · September 2, 2026</span></div>
+        <div class="qbody">This wishbone is HUGE. I wasn’t expecting it to be that huge. My dog still likes it but it’s really noisy on my wood floors. Disrupting.</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme strength">
+      <div class="theme-head">
+        <span class="badge strength">👍 Strength</span>
+        <h3>Long-Lasting Entertainment</h3>
+        <span class="freq">4 mentions</span>
+        
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Highlight long-lasting durability and ability to keep dogs occupied in the listing.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Favorite chew toy</span> <span class="qmeta">✓ Verified Purchase · October 9, 2026</span></div>
+        <div class="qbody">Both of our dogs love these. Golden doodle and Jack Russell. Last a very long time. Not messy.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Perfect for daily chewers!</span> <span class="qmeta">✓ Verified Purchase · October 4, 2026</span></div>
+        <div class="qbody">Our dog absolutely loves these! It has quickly become a favorite, and she chews on it daily. It keeps her completely happy and occupied.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Favorite chew bones for my shepskys</span> <span class="qmeta">✓ Verified Purchase · October 4, 2026</span></div>
+        <div class="qbody">I have ordered these for years... They are always my dog&#39;s favorite go to chew bones. They are a really great large size. The shape makes it really easy for the dogs to get a good grip. They are hard enough to last quite a while, but soft enough to not damage teeth. I feel that for the account if time our dogs enjoy this bone it&#39;s a great value for the money. We can line up all the bones in the ho…</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme strength">
+      <div class="theme-head">
+        <span class="badge strength">👍 Strength</span>
+        <h3>Picky Dogs Approval</h3>
+        <span class="freq">3 mentions</span>
+        
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Emphasize that the product is appealing even to picky dogs, using customer testimonials.</span>
+      </div>
+      <details open><summary>Cited reviews (3)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Picky Beagle approves</span> <span class="qmeta">✓ Verified Purchase · October 8, 2026</span></div>
+        <div class="qbody">My beagle is extremely picky about bones and I&#39;ve wasted a lot of money on bones he never chewed on. Gave him this bone and he&#39;s been chewing on it for 30 minutes straight. Well worth the money.</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Puppy loves it!</span> <span class="qmeta">✓ Verified Purchase · October 7, 2026</span></div>
+        <div class="qbody">My puppy loves it!!</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">♥️ Pibble tested and Pibble approved!</span> <span class="qmeta">✓ Verified Purchase · October 4, 2026</span></div>
+        <div class="qbody">Pibble tested and approved! Thank you Benebone again! This is my velvet hippo’s new favorite flavor of chew! I do wanna point out there’s not a lot of things my little four legged best friend can have because he has IBD! And this is gastrointestinal issue approved! 😃</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme strength">
+      <div class="theme-head">
+        <span class="badge strength">👍 Strength</span>
+        <h3>Ergonomic Design and Grip</h3>
+        <span class="freq">1 mentions</span>
+        
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Feature the easier-to-grip design in product images and description.</span>
+      </div>
+      <details open><summary>Cited reviews (1)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Canine loves it</span> <span class="qmeta">✓ Verified Purchase · October 5, 2026</span></div>
+        <div class="qbody">My dog loves it! It’s easier to grab onto than regular bone shape.</div>
+      </blockquote></details>
+    </div>
+    <div class="card theme strength">
+      <div class="theme-head">
+        <span class="badge strength">👍 Strength</span>
+        <h3>Overall Customer Satisfaction</h3>
+        <span class="freq">2 mentions</span>
+        
+      </div>
+      <div class="meta-row">
+        <span class="tag">Cause: Quality issue</span>
+        <span class="tag action">Action: Showcase high customer ratings and repeat purchase behavior in the listing.</span>
+      </div>
+      <details open><summary>Cited reviews (2)</summary>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">Favorite chew bones for my shepskys</span> <span class="qmeta">✓ Verified Purchase · October 4, 2026</span></div>
+        <div class="qbody">I have ordered these for years... They are always my dog&#39;s favorite go to chew bones. They are a really great large size. The shape makes it really easy for the dogs to get a good grip. They are hard enough to last quite a while, but soft enough to not damage teeth. I feel that for the account if time our dogs enjoy this bone it&#39;s a great value for the money. We can line up all the bones in the ho…</div>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-head"><span class="stars">★★★★★</span> <span class="qtitle">The best!</span> <span class="qmeta">✓ Verified Purchase · October 2, 2026</span></div>
+        <div class="qbody">Best chew bone ever!</div>
+      </blockquote></details>
+    </div>
+
+  <div class="sec-title"><span class="dot" style="background:#0891b2"></span>Buyer Personas</div>
+  <div class="personas"><span class="persona">👤 A budget-conscious dog owner with a strong chewer looking for durable toys but concerned about safety.</span><span class="persona">👤 A pet parent of a picky dog seeking an engaging chew that provides long-lasting entertainment.</span><span class="persona">👤 A cautious buyer who reads reviews and prioritizes product safety and material quality.</span></div>
+
+  <div class="sec-title"><span class="dot" style="background:#4f46e5"></span>Listing Rewrite Checklist (by priority)</div>
+  <ol class="checklist"><li>Add explicit warnings about tooth fracture risk for strong chewers and recommend supervised use only.</li><li>Clarify material safety and add a warning that small pieces may break off and cause choking or gastrointestinal issues.</li><li>Adjust durability claims to match actual lifespan for aggressive chewers and recommend appropriate chew strength.</li><li>Improve edge finishing and add a safety warning to inspect for sharp edges before each use.</li><li>Enhance bacon scent or clearly state that scent may vary and not all dogs will be attracted.</li><li>Provide accurate size chart and hardness guidance to help customers choose the right product for their dog.</li></ol>
+
+  <footer>Citation integrity: 25/25 citations point to real reviews · Generated by voc-tool</footer></div>
 </div>
+<script>
+function setLang(l) {
+  document.querySelectorAll('.lang-page').forEach(p => p.style.display = 'none');
+  document.getElementById('page-' + l).style.display = 'block';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  window.scrollTo({ top: 0 });
+}
+</script>
 </body>
 </html>
