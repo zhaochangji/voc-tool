@@ -1,10 +1,10 @@
 /**
  * 采集端（双供应商）→ 生成 pipeline 可用的 reviews.json
  * 用法：
- *   npm run collect -- --provider apify --asin B00CPDWT2M               # Apify（免费 $5/月额度，测试期主用）
+ *   npm run collect -- --provider apify --asin B00CPDWT2M               # Apify jdtpnjtp（US 站实测可用，免费额度）
  *   npm run collect -- --provider pangolin --keyword "cat water fountain" # Pangolinfo（$19/月，效果对比用）
  *   npm run collect -- --asin B0XXXX --critical 3 --positive 1            # 供应商取 .env 的 PROVIDER，默认 apify
- * 默认：--critical 3 --positive 1
+ * 默认：--critical 3 --positive 1（≈差评30条 + 好评10条）
  * 认证（.env）：APIFY_TOKEN / PANGOLINFO_API_KEY
  * 供应商对比记录见 PROVIDERS.md
  */
@@ -18,7 +18,7 @@ if (existsSync('.env')) {
     }
 }
 
-/* ---------------- 通用评论结构（两种供应商都映射到这里） ---------------- */
+/* ---------------- 通用评论结构 ---------------- */
 
 type CollectedReview = {
     rating: number;
@@ -55,7 +55,7 @@ function writeOut(asin: string, meta: Record<string, unknown>, collected: Collec
     return outFile;
 }
 
-/* ================= 供应商 1：Pangolinfo（MCP） ================= */
+/* ================= 供应商 1：Pangolinfo（MCP，$19/月） ================= */
 
 const MCP_URL = 'https://mcp.pangolinfo.com/mcp';
 let pointTotal = 0;
@@ -98,63 +98,57 @@ async function mcpCall<T = any>(name: string, args: Record<string, unknown>): Pr
 }
 
 async function pangolinCollect(asin: string, critical: number, positive: number, collected: CollectedReview[]) {
-    const push = (list: any[], star: 'critical' | 'positive') => {
-        const seen = new Set<string>();
-        for (const rv of list) {
-            if (!rv.reviewId || seen.has(rv.reviewId)) continue;
-            seen.add(rv.reviewId);
-            collected.push({
-                rating: parseFloat(rv.star) || 0,
-                verified: /verified/i.test(rv.purchased ?? ''),
-                title: rv.title || '',
-                body: rv.content || '',
-                review_id: rv.reviewId,
-                review_date: rv.date,
-                sentiment: star === 'critical' ? 'critical' : 'positive',
+    const run = async (star: 'critical' | 'positive', pages: number) => {
+        for (let p = 1; p <= pages; p++) {
+            const r = await mcpCall<{ data: { json: Array<{ data: { results: any[] } }> } }>('get_amazon_reviews', {
+                asin, site: 'amz_us', pageCount: p, filterByStar: star, sortBy: 'helpful',
             });
+            const list = r.data.json?.[0]?.data?.results ?? [];
+            if (!list.length) { console.error(`  [pangolin ${star}] 第 ${p} 页为空`); break; }
+            for (const rv of list) {
+                if (!rv.reviewId) continue;
+                collected.push({
+                    rating: parseFloat(rv.star) || 0,
+                    verified: /verified/i.test(rv.purchased ?? ''),
+                    title: rv.title || '',
+                    body: rv.content || '',
+                    review_id: rv.reviewId,
+                    review_date: rv.date,
+                    sentiment: star,
+                });
+            }
+            if (p < pages) await sleep(1200);
         }
     };
-    for (let p = 1; p <= critical; p++) {
-        const r = await mcpCall<{ data: { json: Array<{ data: { results: any[] } }> } }>('get_amazon_reviews', {
-            asin, site: 'amz_us', pageCount: p, filterByStar: 'critical', sortBy: 'helpful',
-        });
-        const list = r.data.json?.[0]?.data?.results ?? [];
-        if (!list.length) { console.error(`  [pangolin critical] 第 ${p} 页为空`); break; }
-        push(list, 'critical');
-        if (p < critical) await sleep(1200);
-    }
+    await run('critical', critical);
     await sleep(1000);
-    for (let p = 1; p <= positive; p++) {
-        const r = await mcpCall<{ data: { json: Array<{ data: { results: any[] } }> } }>('get_amazon_reviews', {
-            asin, site: 'amz_us', pageCount: p, filterByStar: 'positive', sortBy: 'helpful',
-        });
-        const list = r.data.json?.[0]?.data?.results ?? [];
-        if (!list.length) { console.error(`  [pangolin positive] 第 ${p} 页为空`); break; }
-        push(list, 'positive');
-        if (p < positive) await sleep(1200);
-    }
-    return { providerMeta: { provider: 'pangolin', pointCost: pointTotal } };
+    await run('positive', positive);
+    return { provider: 'pangolin', pointCost: pointTotal };
 }
 
 /* ================= 供应商 2：Apify（免费额度，测试期主用） ================= */
 
-const APIFY_ACTOR = process.env.APIFY_ACTOR || 'jdtpnjtp~amazon-reviews'; // 实测可用；web_wanderer 在免费账号拿不到数据
+// 实测 2026-10-12：web_wanderer 在免费账号下连自带示例都返 0（疑为住宅代理权限）；jdtpnjtp/amazon-reviews
+// 在 US 站实测可用（16s/30条，starFilter=critical 精准定向 1-2 星），字段：text/title/date/rating/verified_purchase/vine/helpful_count
+const APIFY_ACTOR = process.env.APIFY_ACTOR || 'jdtpnjtp~amazon-reviews';
 
-async function apifyCollect(asin: string, critical: number, positive: number, collected: CollectedReview[]) {
+/** 单次运行：starFilter 定向差评/好评，maxReviewsPerAsin 控制条数 */
+async function apifyRun(asin: string, rating: 'critical' | 'positive', count: number): Promise<any[]> {
     const TOKEN = process.env.APIFY_TOKEN || '';
     if (!TOKEN) throw new Error('缺少 APIFY_TOKEN（.env）——注册 apify.com 后在 Settings → API & Integrations 复制');
-
-    // 目标条数：差评/好评需要量 * 富余（actor 不保证正好，我们本地再按星级分流）
-    const want = (critical + positive) * 10 + 40;
-    const input: Record<string, unknown> = process.env.APIFY_INPUT_JSON
+    if (count <= 0) return [];
+    // 输入定义（2026-10-12 经 GET /v2/acts/jdtpnjtp~amazon-reviews/builds/default 校准）：
+    // products(ASIN 数组), country(us), starFilter(all_stars|critical|positive), sort(recent|helpful), maxReviewsPerAsin
+    const input = process.env.APIFY_INPUT_JSON
         ? JSON.parse(process.env.APIFY_INPUT_JSON)
         : {
-              // ⚠️ 输入字段为初版猜测，拿到 Token 后用 GET /v2/acts/{id}/input 校准
-              productUrls: [`https://www.amazon.com/dp/${asin}`],
-              maxReviews: want,
+              products: [asin],
+              country: 'us',
+              starFilter: rating,
+              sort: 'helpful',
+              maxReviewsPerAsin: count,
           };
-
-    console.error(`  [apify] 运行采集器 ${APIFY_ACTOR}（约 1-3 分钟，按量计费约 $${(want * 0.0018).toFixed(2)}）`);
+    console.error(`  [apify] ${rating} 目标 ${count} 条…`);
     const res = await fetch(
         `https://api.apify.com/v2/acts/${APIFY_ACTOR}/run-sync-get-dataset-items?token=${TOKEN}&timeout=300`,
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) },
@@ -164,32 +158,40 @@ async function apifyCollect(asin: string, critical: number, positive: number, co
         throw new Error(`apify HTTP ${res.status}: ${errText.slice(0, 300)}`);
     }
     const items: any[] = await res.json();
-    console.error(`  [apify] 拉到 ${items.length} 条原始评论，本地按星级分流`);
+    console.error(`  [apify] 返回 ${items.length} 条原始数据`);
+    return items;
+}
 
-    // Apify 返回全量评论 → 本地分差评(≤3星)/好评(≥4星)，各取所需数量
+async function apifyCollect(asin: string, critical: number, positive: number, collected: CollectedReview[]) {
+    const batches: Array<['critical' | 'positive', number]> = [['critical', critical * 10], ['positive', positive * 10]];
+    let totalItems = 0;
     const seen = new Set<string>();
-    let nCritical = 0, nPositive = 0;
-    for (const it of items) {
-        const id = it.reviewId || it.id;
-        if (!id || seen.has(id)) continue;
-        seen.add(id);
-        const rating = Number(it.rating) || 0;
-        const isCrit = rating <= 3;
-        if (isCrit && nCritical >= critical * 10) continue;
-        if (!isCrit && nPositive >= positive * 10) continue;
-        if (isCrit) nCritical++; else nPositive++;
-        collected.push({
-            rating,
-            verified: it.verifiedPurchase === true,
-            title: it.reviewTitle || '',
-            body: it.reviewText || '',
-            review_id: id,
-            review_date: it.reviewDate || '',
-            sentiment: isCrit ? 'critical' : 'positive',
-            helpful: it.helpfulVoteCount ?? undefined,
-        });
+    for (const [rating, count] of batches) {
+        const items = await apifyRun(asin, rating, count);
+        totalItems += items.length;
+        for (const it of items) {
+            // jdtpnjtp 无 reviewId 字段，用 作者|日期|标题 组合键去重
+            const id = `${it.author}|${it.date}|${String(it.title).slice(0, 30)}`;
+            if (seen.has(id)) continue;
+            seen.add(id);
+            const rt = Number(it.rating) || 0;
+            // 双保险：starFilter 失效时按星级本地再分流
+            const isCrit = rt <= 3;
+            if (rating === 'critical' && !isCrit) continue;
+            if (rating === 'positive' && isCrit) continue;
+            collected.push({
+                rating: rt,
+                verified: it.verified_purchase === true,
+                title: it.title || '',
+                body: it.text || '',
+                review_id: id,
+                review_date: it.date || '',
+                sentiment: isCrit ? 'critical' : 'positive',
+                helpful: it.helpful_count ?? undefined,
+            });
+        }
     }
-    return { provider: 'apify', items: items.length };
+    return { provider: 'apify', actor: APIFY_ACTOR, items: totalItems };
 }
 
 /* ================= 主流程 ================= */
@@ -200,13 +202,9 @@ async function main() {
     let asin = opt.asin;
     let providerMeta: Record<string, unknown> = {};
 
-    // ASIN 优先；关键词搜索目前仅 pangolin 支持（Apify 搜索采集器需另外接入，内测期手动给 ASIN 即可）
+    // 关键词搜索目前仅 pangolin 支持（内测期可先在 Amazon 页面手动复制 ASIN）
     if (!asin && opt.keyword) {
-        if (opt.provider !== 'pangolin') {
-            console.error('==> 关键词搜索目前仅 pangolin 供应商支持；请直接给 --asin（从 Amazon 页面复制）');
-            console.error('==> 临时切到 pangolin 执行搜索……');
-        }
-        console.error(`==> 搜索 "${opt.keyword}"`);
+        console.error(`==> 搜索 "${opt.keyword}"（经 pangolin）`);
         const s = await mcpCall<{ data: { json: Array<{ data: { results: Array<{ asin: string; sponsored?: string; rating?: string }> } }> } }>('search_amazon', {
             keyword: opt.keyword, site: 'amz_us',
         });
@@ -221,7 +219,7 @@ async function main() {
     const meta: Record<string, unknown> = {};
 
     try {
-        console.error(`==> 供应商 ${opt.provider}，拉取差评 ${opt.critical} 页组 + 好评 ${opt.positive} 页组`);
+        console.error(`==> 供应商 ${opt.provider}，目标差评 ${opt.critical * 10} 条 + 好评 ${opt.positive * 10} 条`);
         if (opt.provider === 'pangolin') {
             providerMeta = await pangolinCollect(asin, opt.critical, opt.positive, collected);
         } else {
