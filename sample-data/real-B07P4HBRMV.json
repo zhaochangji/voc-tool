@@ -2,9 +2,9 @@
   "meta": {
     "provider": "apify",
     "actor": "jdtpnjtp~amazon-reviews",
-    "items": 40,
+    "items": 50,
     "asin": "B07P4HBRMV",
-    "collectedAt": "2026-10-12T03:48:44.247Z",
+    "collectedAt": "2026-10-12T03:58:11.537Z",
     "partial": false
   },
   "reviews": [
@@ -339,6 +339,116 @@
       "seq": 30
     },
     {
+      "rating": 3,
+      "verified": true,
+      "title": "Prices was $22.79 April 2025",
+      "body": "Crazy how they have inflated the price for this item! Otherwise it’s good, but I would not buy it at this price.",
+      "review_id": "dorkbat|October 8, 2026|Prices was $22.79 April 2025",
+      "review_date": "October 8, 2026",
+      "sentiment": "critical",
+      "helpful": 1,
+      "seq": 31
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "2yrs and dead",
+      "body": "Memory Error after 2 years in my dash cam. I got the 256gb to avoid constantly erasing it in hopes to maximize life, I opted for this high endurance specially due to temp fluctuations and high / lows. I have old micro sd cards sub 32gb that have sat in my cars for over 8 years no issues as well as others with similar capacity in outdoor cameras. I think the issue is more the nature of dash cams and the volume of writes/ rewrites to the card. All that said it sits a a price point that makes other options less tempting",
+      "review_id": "Ricky Andreorio|October 1, 2026|2yrs and dead",
+      "review_date": "October 1, 2026",
+      "sentiment": "critical",
+      "helpful": 1,
+      "seq": 32
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "Not good",
+      "body": "Not good",
+      "review_id": "Atiqur Rahman|September 22, 2026|Not good",
+      "review_date": "September 22, 2026",
+      "sentiment": "critical",
+      "helpful": 1,
+      "seq": 33
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "Not very high endurance",
+      "body": "High endurance but overheats in my dash cam when it’s 82 out.",
+      "review_id": "Malkie|September 6, 2026|Not very high endurance",
+      "review_date": "September 6, 2026",
+      "sentiment": "critical",
+      "helpful": 0,
+      "seq": 34
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "No issues",
+      "body": "Product is as described. Problem is that it took 5 times as long to deliver. I bought this because I wanted something is durable and can be written to many times without degradation. These are supposed to have high endurance. we will see. For now it works. No issues.",
+      "review_id": "Carolyn|August 19, 2026|No issues",
+      "review_date": "August 19, 2026",
+      "sentiment": "critical",
+      "helpful": 0,
+      "seq": 35
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "Customer service ??",
+      "body": "Card stopped working 40 days after purchase and I can’t get a refund or exchange? Trying to get help but no one is getting back to me.",
+      "review_id": "Amazon Customer|August 3, 2026|Customer service ??",
+      "review_date": "August 3, 2026",
+      "sentiment": "critical",
+      "helpful": 1,
+      "seq": 36
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "had back luck with mine, got corrupted 35 days later in my dash cam.",
+      "body": "had back luck with mine, got corrupted 35 days later in my dash cam. lost the money$$$",
+      "review_id": "XiaoYing|July 24, 2026|had back luck with mine, got c",
+      "review_date": "July 24, 2026",
+      "sentiment": "critical",
+      "helpful": 1,
+      "seq": 37
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "Impossible packaging",
+      "body": "Getting this out of it's packaging was extremely difficult without damaging it. I understand wanting to protect it, but if you wreck it getting out of the packaging it's not worth it.",
+      "review_id": "Jason Alt|June 26, 2026|Impossible packaging",
+      "review_date": "June 26, 2026",
+      "sentiment": "critical",
+      "helpful": 2,
+      "seq": 38
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "You will wait a month before getting this",
+      "body": "The Product is good,but to keep delaying a product until you get it a month later,just totally destroys a company's image overall,no explanation no nothing,this is absolutely horrible",
+      "review_id": "elijah|June 18, 2026|You will wait a month before g",
+      "review_date": "June 18, 2026",
+      "sentiment": "critical",
+      "helpful": 0,
+      "seq": 39
+    },
+    {
+      "rating": 3,
+      "verified": true,
+      "title": "Constant memory errors and slow card warnings",
+      "body": "I bought this card for my dash cam, but it frequently prompts \"slow card\" and gives memory card errors. It is not very reliable.",
+      "review_id": "Xiao Xiao|June 4, 2026|Constant memory errors and slo",
+      "review_date": "June 4, 2026",
+      "sentiment": "critical",
+      "helpful": 0,
+      "seq": 40
+    },
+    {
       "rating": 5,
       "verified": true,
       "title": "Good",
@@ -347,7 +457,7 @@
       "review_date": "October 9, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 31
+      "seq": 41
     },
     {
       "rating": 5,
@@ -358,7 +468,7 @@
       "review_date": "October 8, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 32
+      "seq": 42
     },
     {
       "rating": 5,
@@ -369,7 +479,7 @@
       "review_date": "October 7, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 33
+      "seq": 43
     },
     {
       "rating": 5,
@@ -380,7 +490,7 @@
       "review_date": "October 7, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 34
+      "seq": 44
     },
     {
       "rating": 5,
@@ -391,7 +501,7 @@
       "review_date": "October 7, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 35
+      "seq": 45
     },
     {
       "rating": 5,
@@ -402,7 +512,7 @@
       "review_date": "October 7, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 36
+      "seq": 46
     },
     {
       "rating": 5,
@@ -413,7 +523,7 @@
       "review_date": "October 6, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 37
+      "seq": 47
     },
     {
       "rating": 5,
@@ -424,7 +534,7 @@
       "review_date": "October 6, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 38
+      "seq": 48
     },
     {
       "rating": 5,
@@ -435,7 +545,7 @@
       "review_date": "October 4, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 39
+      "seq": 49
     },
     {
       "rating": 5,
@@ -446,7 +556,7 @@
       "review_date": "October 4, 2026",
       "sentiment": "positive",
       "helpful": 0,
-      "seq": 40
+      "seq": 50
     }
   ]
 }
