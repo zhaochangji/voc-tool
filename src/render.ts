@@ -161,7 +161,7 @@ const html = `<!DOCTYPE html>
   <ol class="checklist">${report.report.listing_rewrite_checklist.map(c => `<li>${esc(c)}</li>`).join('')}</ol>
 
   <footer>
-    引用可信度：${citationOk}/${cited.length} 条引用指向真实评论 · 分析模型 ${esc(report.meta.model)} · LLM 成本 $${report.meta.cost_usd} · 生成于 voc-tool
+    引用可信度：${citationOk}/${cited.length} 条引用指向真实评论 · 生成于 voc-tool
   </footer>
 </div>
 </body>
