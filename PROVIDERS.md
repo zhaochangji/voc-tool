@@ -40,3 +40,17 @@
 npm run collect -- --provider apify --asin B00CPDWT2M      # 默认（.env PROVIDER 也行）
 npm run collect -- --provider pangolin --keyword "..."    # 效果对比
 ```
+
+## 国际平台扩展实测（2026-10-12，Apify 商店公开数据）
+
+| 平台 | 成熟度 | 推荐采集器 | 状态 |
+|---|---|---|---|
+| **Walmart** | ★★★★★ | `e-commerce/walmart-reviews-scraper`（577 用户）| 可接入（第一优先）|
+| **Etsy** | ★★★★ | `hello.datawizards/etsy-reviews`（505 用户）| 可接入（等需求）|
+| **AliExpress** | ★★★★ | `crowdpull/aliexpress-reviews-scraper`（240 用户）| 可接入（等需求）|
+| **Temu** | ★★ | ❌ 只有商品采集器，无评论采集器 | 暂缓（上新快，评论生态不成熟）|
+| **eBay/TikTok Shop** | ★ | 无成熟商品评论采集器 | 暂缓 |
+
+- 全部 PAY_PER_EVENT 计费，**共用 Apify $5/月免费额度**（一张额度刷全平台）
+- 接入方式：provider 适配器加 platform 映射，每平台半天（字段映射为主）
+- 策略：**先只在 Amazon 上验证商业模式**；有买家提出跨平台需求再接 Walmart；其余等真实需求
