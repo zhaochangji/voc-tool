@@ -1,6 +1,6 @@
 # RESUME.md — 会话恢复指南（新会话/未来的我先读这个）
 
-> 最后更新：2026-10-12 11:15 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
+> 最后更新：2026-10-12 11:55 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
 > 位置：`~/Documents/projects/voc-tool`（GitHub 私有仓库：git@github.com:zhaochangji/voc-tool.git，SSH 已配好）
 
 ## 一句话现状
@@ -65,6 +65,24 @@ npx tsc --noEmit                                            # 类型检查
 ## 已知未修问题
 
 （暂无 —— Strengths 混淆已于 2026-10-10 修复：主题加 kind 双组聚类，验证通过：优点栏=Quiet operation/Stainless steel hygiene/Large capacity，风险栏=Pump clogging/Water noise/Pump failure）
+
+## 已完成里程碑（2026-10-12 补记）
+
+- [x] 免费采集链路打通：Apify jdtpnjtp/amazon-reviews（web_wanderer 免费版不可用，勿回头）
+- [x] 报告双语一键切换（管线双语言生成 + render 切换按钮）
+- [x] 跨类目验证 3 个类目：宠物（2）/ 耳机（薄样本）/ 存储卡（大样本）——全部通过，25/25 引用
+- [x] 竞品分析 COMPETITORS.md（差异化：全场独有的"结论点开原评论"）
+- [x] analyze 多文件警告（防 real-*.json 通配符误用）
+- [x] USER-GUIDE 全面刷新（三步流程/免费链路/新坑）
+
+## 改进清单（Backlog）
+
+1. 3 星中评缺失（jdtpnjtp critical 只有 1-2 星）——starFilter=all_stars 本地分流可解
+2. report.html 打印/PDF 按钮
+3. 卖家精灵/Shulex 亲测（对比图+定价核实）
+4. Key 轮换（Apify/DeepSeek/Pangolinfo 均在聊天暴露过）
+5. 监控模式（recent 排序+增量+推送）
+6. 文件回退根因（疑似 IDE 旧缓冲区；用户需关闭旧标签页）
 
 ## Phase 2 待办（下一步，按此顺序）
 
