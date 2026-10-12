@@ -6,7 +6,8 @@
     "scripts": {
         "analyze": "tsx src/pipeline.ts",
         "typecheck": "tsc --noEmit",
-        "collect": "tsx src/collect.ts"
+        "collect": "tsx src/collect.ts",
+        "render": "tsx src/render.ts"
     },
     "dependencies": {
         "openai": "^4.60.0",
