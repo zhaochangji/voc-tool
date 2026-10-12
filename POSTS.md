@@ -51,44 +51,65 @@
 
 ---
 
-## 二、Reddit 版（r/FulfillmentByAmazon，英文）
+## 二、Reddit 版（r/FulfillmentByAmazon）—— Rule 2 合规两版
 
-### 标题
+> ⚠️ 2026-10-12：直接发 "free reports for 20 ASINs" 被 Reddit 自动检测判定违反 Rule 2（宣传自有产品/服务需版主批准，违者封号）。**禁止直接发原 offer 版**。走 A 或 B。
 
-`I built a tool that turns a competitor's reviews into a listing rewrite checklist — every claim links back to the original review. First 20 ASINs get one free, no strings.`
+### B 路（推荐先走）：纯案例研究帖（零推广，Rule 2 安全）
 
-### 正文
+**标题：**
+`Case study: I read the one-star reviews of a top-selling SanDisk High Endurance 256GB card. Here's what buyers are actually angry about.`
 
----
-
-Context: I'm an indie dev validating a product idea. Not a pitch — you get a free report, I learn whether this is useful. Sharing because the output seems genuinely valuable.
-
-**What it does:** you give me an ASIN, it pulls the 30 most helpful 1-2★ reviews, 10 three-star reviews, and 10 five-star reviews, then produces a report:
-- Top risks & strengths, clustered into themes with frequency counts
-- **Every theme cites the actual reviews it's based on** (click and read the original text — no black-box AI claims)
-- Root-cause labels (quality / size mismatch / listing-misleading / expectation gap)
-- A prioritized listing rewrite checklist
-- Clean single-page HTML report you can share with your team
-
-**Example — SanDisk High Endurance 256GB (B07P4HBRMV, ~5k+ ratings):**
-
-The #1 risk theme was *premature card failure in dash cams and security cams* — 14 of the 30 critical reviews. Ironic for a card literally named "High Endurance". The 3-star reviews surfaced things invisible in 1-2★ reviews: price creeping up, shipping delays, hard-to-open packaging.
-
-Verdict: improve-first. Top checklist items: clearly state the card isn't suited for continuous-write devices, list known-incompatible camera models (Vantrue, Tapo came up repeatedly), publish a real operating-temp limit.
-
-**The offer:** drop an ASIN below (ideally 500+ ratings so the critical pool is thick). First 20 get a full HTML report back within 24h. All I ask in return: tell me which parts of the report were useful and which were noise.
-
-Happy to answer questions about how it works (data comes from a licensed scraping service, not me hammering Amazon).
+**正文（直接复制）：**
 
 ---
 
-**发帖后立即以楼主身份回帖的 FAQ 评论（直接复制）：**
+I pulled the 30 most helpful one- and two-star reviews of the SanDisk High Endurance 256GB (B07P4HBRMV, one of the most-bought microSD cards on Amazon) and clustered them to see what buyers are actually angry about. Every finding below cites the original reviews.
 
-> **FAQ, answering up front:**
+**#1 risk: premature card failure inside dash cams and security cams** — 14 of the 30 critical reviews. Ironic for a card literally named "High Endurance", and worth knowing before you stock or list one.
+
+Other themes: overheating in hot environments (5), card corruption / data loss (5).
+
+**The three-star goldmine** — reviews nobody reads, but they're where the "I like it, but..." feedback lives:
+- Price creeping up
+- Shipping delays
+- Hard-to-open packaging
+
+**If I were the seller, my listing fixes would be, in order:**
+1. Be explicit about what the card is and is not suited for (continuous-write dash cam duty came up repeatedly), and name known-problematic camera pairings — Vantrue and Tapo were mentioned by name in reviews
+2. Publish a real operating temperature limit instead of marketing copy
+3. Add inspection/replacement guidance: edges and housings degrade, and broken-off pieces ending up inside a device was a recurring fear
+4. Address the price creep directly — several 3-star reviews were pure price complaints
+
+Happy to do more products if people find this format useful — drop suggestions in the comments.
+
+---
+
+**⚠️ 红线自查（B 路帖内禁止出现）：** "I built a tool" / "free reports" / "first 20" / 任何工具名、截图里的工具界面、任何引导 DM 的句子。有人问 "how did you analyze this" → 评论区回答 "LLM-assisted workflow, every claim cites the source review" 即可，**不要在主帖引流**。
+
+### A 路：Modmail 申请批准（想带工具/offer 时用）
+
+**发给版主（Message the mods）的模板：**
+
+> Subject: Requesting approval for a free-review-analysis post
+>
+> Hi mods, before posting I'd like your guidance. I built a small tool that turns a product's critical reviews into a listing rewrite checklist (every claim cites the original review text). I'd like to share a case study on a popular microSD card and **offer free reports to a limited number of sellers (no signup, no email, delivered in comments)**.
+>
+> Questions:
+> 1. Is the free-report offer acceptable under the promotional guidelines, and in what form?
+> 2. If tool mentions aren't allowed, am I OK posting just the case-study findings with no tool/service mention?
+>
+> Happy to follow whatever format you prefer.
+
+**版主回复的两种走向：** 批准 → 原.offer 版可发（POSTS.md 旧版文案保留作备用）；拒绝/不回 → 走 B 路。
+
+### 发帖后 FAQ 自评（B 路也保留，仅保留前两条）
+
+> **FAQ:**
 > - **Where does the data come from?** A licensed scraping API (paid per result). I'm not hitting Amazon directly.
-> - **Do you store my ASINs or ask for email?** No. Report is generated on demand and nothing is tied to you — just drop the ASIN in the comments.
-> - **Why free?** I'm validating whether this workflow is useful before building anything bigger. Your feedback IS the payment.
-> - **What if my product has few reviews?** Below ~200 ratings the report gets thin — I'll tell you the ASIN isn't a good fit rather than send you junk.
+> - **Method?** LLM-assisted clustering; every theme cites the source reviews so nothing is unverifiable.
+
+（A 路才用完整的四条 FAQ，含 storage/why free。）
 
 ## 三、发帖执行手册
 
@@ -108,7 +129,7 @@ Happy to answer questions about how it works (data comes from a licensed scrapin
 
 | 优先级 | 渠道 | 注册 | 注意 |
 |---|---|---|---|
-| ① | **Reddit r/FulfillmentByAmazon** | 免费 | **建议首发**（免费+英文报告就绪+受众最大）；先读版规；北京时间晚 9-11 点发（美区早高峰） |
+| ① | **Reddit r/FulfillmentByAmazon** | 免费 | **首发走 B 路纯案例帖**（Rule 2 禁 offer）；北京时间晚 9-11 点发（美区早高峰） |
 | ② | **AMZ123 卖家论坛**（bbs.amz123.com） | 免费 | 亚马逊垂类最准；新人号可能有限发帖等级，注册后先签到/回帖养号 1-2 天再发主帖 |
 | ③ | 雨果网（cifnews.com 社区） | 免费 | 跨境人群广；注册后可发帖，发在运营/Listing 相关板块 |
 | ④ | 创蓝论坛 / 福步（亚马逊板块） | 免费 | 同一份文案复用；注意各站规则 |
