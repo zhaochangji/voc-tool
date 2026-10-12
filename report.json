@@ -1,62 +1,200 @@
 {
   "meta": {
-    "model": "dry-run-stub",
-    "reviewCount": 4,
-    "cost_usd": 0,
+    "model": "deepseek-chat",
+    "reviewCount": 40,
+    "cost_usd": 0.003,
     "tokens": {
-      "input": 0,
-      "output": 0
+      "input": 6080,
+      "output": 3056
     }
   },
   "report": {
-    "executive_summary": "[DRY-RUN 桩数据] 基于 4 条评论，共 2 个主题。最大风险与主题 1 相关。此报告仅验证链路，非真实分析。",
+    "executive_summary": "The biggest risk is safety-related: sharp edges, tooth damage, and plastic ingestion are severe quality issues that can lead to returns, negative reviews, and potential liability. The biggest opportunity is that many dogs love the chew and stay engaged, with long-lasting durability and ergonomic shape as differentiators. For Amazon small sellers, the product can sell if the listing is rewritten to set clear expectations, add safety warnings, and target the right dog/chewer profile.",
     "top_strengths": [
       {
-        "theme": "good value for price",
-        "frequency": 1
+        "theme": "Dogs Love It and Stay Engaged",
+        "frequency": 6
+      },
+      {
+        "theme": "Long-Lasting Durability",
+        "frequency": 3
+      },
+      {
+        "theme": "Ergonomic Shape and Easy Grip",
+        "frequency": 2
       }
     ],
     "top_risks": [
       {
-        "theme": "durability / description mismatch",
-        "frequency": 1
+        "theme": "Sharp Edges Causing Oral Injury",
+        "frequency": 5
+      },
+      {
+        "theme": "Tooth Damage and Breakage",
+        "frequency": 4
+      },
+      {
+        "theme": "Plastic Ingestion and Illness",
+        "frequency": 4
       }
     ],
     "buyer_personas": [
-      "multi-pet household owner"
+      "A dog owner with a moderate chewer looking for a durable, engaging chew that keeps their dog busy.",
+      "A pet parent of a picky or special-needs dog seeking a chew their dog will actually accept.",
+      "A price-conscious Amazon shopper who reads reviews and expects clear safety and sizing information before buying."
     ],
     "listing_rewrite_checklist": [
-      "add accurate dimensions",
-      "set correct expectations in images"
+      "Add a prominent safety warning about sharp edges, tooth damage, and plastic ingestion; include inspection and replacement guidance.",
+      "State the exact material hardness and recommend the product only for dogs under a certain chew-strength level; add a tooth-safety disclaimer.",
+      "Clarify the exact material composition and warn that broken-off pieces must be removed immediately to prevent ingestion.",
+      "Publish a chew-durability rating and clearly state which dog sizes/chew strengths the product is not suitable for.",
+      "Temper scent/flavor claims and add a note that some dogs may not be interested, with a satisfaction guarantee mention.",
+      "Add a clear size chart with exact dimensions per flavor/variant and verify that medium and small differ as labeled.",
+      "Include exact dimensions and weight in listing images and description so buyers can gauge actual size before purchase.",
+      "Highlight that the product keeps dogs occupied and is a favorite daily chew, using customer quotes.",
+      "Emphasize long-lasting durability in bullet points and A+ content, noting it outlasts typical chew bones.",
+      "Add a bullet point and image callout explaining the wishbone shape is easier for dogs to grip than a standard bone.",
+      "Include a note that the product is well-received by picky eaters and dogs with dietary sensitivities, based on customer feedback."
     ],
     "verdict": "improve-first"
   },
   "themes": [
     {
       "kind": "risk",
-      "theme": "durability / description mismatch",
+      "theme": "Sharp Edges Causing Oral Injury",
+      "frequency": 5,
+      "severity_avg": 4.6,
+      "sample_seqs": [
+        1,
+        12,
+        28
+      ],
+      "root_cause": "quality",
+      "listing_action": "Add a warning that worn or chewed edges may become sharp and should be inspected/replaced, and specify a recommended replacement interval."
+    },
+    {
+      "kind": "risk",
+      "theme": "Tooth Damage and Breakage",
+      "frequency": 4,
+      "severity_avg": 5,
+      "sample_seqs": [
+        3,
+        6,
+        21
+      ],
+      "root_cause": "quality",
+      "listing_action": "State the material hardness explicitly and recommend the product only for dogs under a certain chew-strength level; add a tooth-safety disclaimer."
+    },
+    {
+      "kind": "risk",
+      "theme": "Plastic Ingestion and Illness",
+      "frequency": 4,
+      "severity_avg": 4.5,
+      "sample_seqs": [
+        2,
+        7,
+        18
+      ],
+      "root_cause": "quality",
+      "listing_action": "Clarify the exact material composition and add a warning that broken-off pieces must be removed immediately to prevent ingestion."
+    },
+    {
+      "kind": "risk",
+      "theme": "Low Durability and Breaking Apart",
+      "frequency": 4,
+      "severity_avg": 3.5,
+      "sample_seqs": [
+        8,
+        15,
+        23
+      ],
+      "root_cause": "quality",
+      "listing_action": "Publish a chew-durability rating and clearly state which dog sizes/chew strengths the product is not suitable for."
+    },
+    {
+      "kind": "risk",
+      "theme": "Dog Refusal and Lack of Interest",
+      "frequency": 7,
+      "severity_avg": 2,
+      "sample_seqs": [
+        4,
+        10,
+        11
+      ],
+      "root_cause": "expectation_gap",
+      "listing_action": "Temper scent/flavor claims (e.g., 'bacon-scented') and add a note that some dogs may not be interested, with a satisfaction guarantee mention."
+    },
+    {
+      "kind": "risk",
+      "theme": "Size Mismatch Between Variants",
       "frequency": 1,
       "severity_avg": 4,
       "sample_seqs": [
-        1,
-        2,
-        3
+        16
       ],
-      "root_cause": "quality",
-      "listing_action": "add accurate dimensions and material specs to bullet points"
+      "root_cause": "size_mismatch",
+      "listing_action": "Add a clear size chart with exact dimensions per flavor/variant and verify that medium and small differ as labeled."
+    },
+    {
+      "kind": "risk",
+      "theme": "Oversized and Noisy on Floors",
+      "frequency": 1,
+      "severity_avg": 2,
+      "sample_seqs": [
+        20
+      ],
+      "root_cause": "expectation_gap",
+      "listing_action": "Include exact dimensions and weight in the listing images and description so buyers can gauge actual size before purchase."
     },
     {
       "kind": "strength",
-      "theme": "good value for price",
-      "frequency": 1,
+      "theme": "Dogs Love It and Stay Engaged",
+      "frequency": 6,
       "severity_avg": 0,
       "sample_seqs": [
-        1,
-        2,
-        3
+        31,
+        32,
+        34
       ],
       "root_cause": "expectation_gap",
-      "listing_action": "highlight value messaging in title"
+      "listing_action": "Highlight in the listing that the product keeps dogs occupied and is a favorite daily chew, using these customer quotes."
+    },
+    {
+      "kind": "strength",
+      "theme": "Long-Lasting Durability",
+      "frequency": 3,
+      "severity_avg": 0,
+      "sample_seqs": [
+        31,
+        38,
+        39
+      ],
+      "root_cause": "expectation_gap",
+      "listing_action": "Emphasize long-lasting durability in the bullet points and A+ content, noting it outlasts typical chew bones."
+    },
+    {
+      "kind": "strength",
+      "theme": "Ergonomic Shape and Easy Grip",
+      "frequency": 2,
+      "severity_avg": 0,
+      "sample_seqs": [
+        35,
+        38
+      ],
+      "root_cause": "expectation_gap",
+      "listing_action": "Add a bullet point and image callout explaining the wishbone shape is easier for dogs to grip than a standard bone."
+    },
+    {
+      "kind": "strength",
+      "theme": "Suitable for Picky and Special-Needs Dogs",
+      "frequency": 2,
+      "severity_avg": 0,
+      "sample_seqs": [
+        32,
+        36
+      ],
+      "root_cause": "expectation_gap",
+      "listing_action": "Include a note that the product is well-received by picky eaters and dogs with dietary sensitivities, based on customer feedback."
     }
   ]
 }

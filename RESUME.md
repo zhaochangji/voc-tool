@@ -1,6 +1,6 @@
 # RESUME.md — 会话恢复指南（新会话/未来的我先读这个）
 
-> 最后更新：2026-10-10 19:40 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
+> 最后更新：2026-10-12 11:15 | 项目：亚马逊评论 VOC 分析工具（副业，赚工具钱）
 > 位置：`~/Documents/projects/voc-tool`（GitHub 私有仓库：git@github.com:zhaochangji/voc-tool.git，SSH 已配好）
 
 ## 一句话现状
